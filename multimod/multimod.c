@@ -8,16 +8,36 @@ void srl_128(bool, uint64_t*, uint64_t*);
 
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
 	// printf("0x%016lx %016lx\n", a, b);
-	short count = 0;
-	while(a >= m && count < 10000) {
-		a -= m;
-		count++;
-		//	printf("%lu\n",a);
+	/*
+	   short count = 0;
+	   while(a >= m && count < 10000) {
+	   a -= m;
+	   count++;
+	//	printf("%lu\n",a);
 	}
 	while(b >= m && count < 20000) {
-		b -= m;
-		count++;
-		// printf("%lu\n", b);
+	b -= m;
+	count++;
+	// printf("%lu\n", b);
+	}
+	*/
+	short len = 64;
+	while((m>>(len-1))==0) {len--;}
+	short len_0 = 64 - len;
+	while (len_0 >= 0){
+		while (a >= (m<<len_0)) {
+			a -= (m<<len_0);
+			//	printf("0x%016lx %016lx\n", *h_64, *l_64);
+		}
+		len_0--;
+	}
+	len_0 = 64 - len;
+	while (len_0 >= 0){
+		while (b >= (m<<len_0)) {
+			b -= (m<<len_0);
+			//	printf("0x%016lx %016lx\n", *h_64, *l_64);
+		}
+		len_0--;
 	}
 	uint64_t *h_64 = (uint64_t*)malloc(8);
 	uint64_t *l_64 = (uint64_t*)malloc(8);
@@ -37,7 +57,7 @@ void module_128(uint64_t* h_64, uint64_t* l_64, uint64_t m){
 	while (len_0 >= 0){
 		while (*h_64 >= (m<<len_0)) {
 			*h_64 -= (m<<len_0);
-		//	printf("0x%016lx %016lx\n", *h_64, *l_64);
+			//	printf("0x%016lx %016lx\n", *h_64, *l_64);
 		}
 		len_0--;
 	}
@@ -49,11 +69,11 @@ void module_128(uint64_t* h_64, uint64_t* l_64, uint64_t m){
 			if (*l_64 > temp_l) {
 				*h_64 -= 1;
 			}
-		//	printf("0x%016lx %016lx\n", *h_64, *l_64);
+			//	printf("0x%016lx %016lx\n", *h_64, *l_64);
 		}
 		len_0--;
 	}
-	
+
 }
 
 void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
