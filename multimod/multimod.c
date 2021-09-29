@@ -9,8 +9,8 @@ bool add_128(uint64_t*, unsigned);
 void sub_128(uint64_t*, uint64_t*, unsigned);
 
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
-	while(a >= m) {a -= m};
-	while(b >= m) {b -= m};
+	while(a >= m) {a -= m;}
+	while(b >= m) {b -= m;}
 	uint64_t *h_64 = (uint64_t*)malloc(8);
 	uint64_t *l_64 = (uint64_t*)malloc(8);
 	multiply_128(a, b, h_64, l_64);
