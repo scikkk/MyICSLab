@@ -8,8 +8,14 @@ void srl_128(bool, uint64_t*, uint64_t*);
 
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
 	printf("0x%016lx %016lx\n", a, b);
-	while(a >= m) {a -= m;printf("%lu\n",a);}
-	while(b >= m) {b -= m;printf("%lu\n", b);}
+	while(a >= m) {
+		a -= m;
+		//	printf("%lu\n",a);
+	}
+	while(b >= m) {
+		b -= m;
+		// printf("%lu\n", b);
+	}
 	uint64_t *h_64 = (uint64_t*)malloc(8);
 	uint64_t *l_64 = (uint64_t*)malloc(8);
 	printf("0x%016lx %016lx\n", a, b);
@@ -103,7 +109,7 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 		y0 = y1;
 	}
 
-		printf("0x%d%d %016lx %016lx %d%d\n",cout2, cout1, *hres, *lres, y1, y0);
+	printf("0x%d%d %016lx %016lx %d%d\n",cout2, cout1, *hres, *lres, y1, y0);
 }
 
 void srl_128( bool c1, uint64_t *h_64, uint64_t *l_64) {
