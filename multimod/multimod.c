@@ -33,26 +33,27 @@ void module_128(uint64_t* h_64, uint64_t* l_64, uint64_t m){
 	uint64_t temp_l;
 	short len = 64;
 	while((m>>(len-1))==0) {len--;}
-	len = 64 - len;
-	while (len >= 0){
-		while (*h_64 >= (m<<len)) {
-			*h_64 -= (m<<len);
+	short len_0 = 64 - len;
+	while (len_0 >= 0){
+		while (*h_64 >= (m<<len_0)) {
+			*h_64 -= (m<<len_0);
 			printf("0x%016lx %016lx\n", *h_64, *l_64);
 		}
-		len--;
+		len_0--;
 	}
-	while(*h_64 != 0) {
-		temp_l = *l_64;
-		*l_64 -= m;
-		if (*l_64 > temp_l) {
-			*h_64 -= 1;
+	len_0 = 64 - len;
+	while (len_0 >= 0){
+		while (*h_64 != 0 || *l_64 >= (m<<len_0)) {
+			temp_l = *l_64;
+			*l_64 -= (m<<len_0);
+			if (*l_64 > temp_l) {
+				*h_64 -= 1;
+			}
+			printf("0x%016lx %016lx\n", *h_64, *l_64);
 		}
-		printf("0x%016lx %016lx\n", *h_64, *l_64);
+		len_0--;
 	}
-	while (*l_64 >= m) {
-		*l_64 -= m;
-		printf("0x%016lx %016lx\n", *h_64, *l_64);
-	}
+	
 }
 
 void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
