@@ -41,7 +41,7 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 void sll_128(uint64_t *h_64, uint64_t *l_64, unsigned num) {
 	for (unsigned k = 0; k < num; k++){
 		*h_64 <<= 1;
-		if ((*l_64|0x8000000000000000) != 0) {
+		if ((*l_64>>63)== 1) {
 			*h_64 |= 0x1;
 		}
 		*l_64 <<= 1;
