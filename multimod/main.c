@@ -27,6 +27,6 @@ int main() {
 	/* test(123, 456, -1ULL); */
 	/* test(41258, -2ULL, -1ULL); // should be 1 */
 	/* test(-2ULL, 102485, -1ULL); // should be 1 */
-	test(-2ULL, -2ULL, 142558); // should be 1
+//	test(-2ULL, -2ULL, 142558); // should be 1
 	test(-2ULL, -2ULL, -1ULL); // should be 1
 }
