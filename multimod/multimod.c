@@ -33,7 +33,6 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 	*lres = b;
 	short y0 = 0,y1;
 	for (int k = 0; k < 64; k++) {
-		y0 = y1;
         y1 = *lres&0x1;
 		if (y0-y1==1) {
 			add_128(hres, a);
@@ -42,6 +41,7 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 		sub_128(hres, lres, a);
 		}
 		srl_128(hres,lres);
+		y0 = y1;
 	}
 }
 
