@@ -7,7 +7,7 @@ void module_128(uint64_t*, uint64_t*, uint64_t);
 void srl_128(bool, uint64_t*, uint64_t*);
 
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
-	printf("0x%016lx %016lx\n", a, b);
+	// printf("0x%016lx %016lx\n", a, b);
 	short count = 0;
 	while(a >= m && count < 10000) {
 		a -= m;
@@ -21,9 +21,9 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
 	}
 	uint64_t *h_64 = (uint64_t*)malloc(8);
 	uint64_t *l_64 = (uint64_t*)malloc(8);
-	printf("0x%016lx %016lx\n", a, b);
+	// printf("0x%016lx %016lx\n", a, b);
 	multiply_128(a, b, h_64, l_64);
-	printf("0x%016lx %016lx\n", *h_64, *l_64);
+	// printf("0x%016lx %016lx\n", *h_64, *l_64);
 	module_128(h_64, l_64, m);
 	// return (a * b) % m; // buggy
 	return *l_64;
@@ -51,7 +51,7 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 	short y0 = 0,y1;
 	for (int k = 0; k < 65; k++) {
 		y1 = *lres&0x1;
-		printf("0x%d%d %016lx %016lx %d%d\n",cout2, cout1, *hres, *lres, y1, y0);
+		// printf("0x%d%d %016lx %016lx %d%d\n",cout2, cout1, *hres, *lres, y1, y0);
 		if (y0-y1==1) {
 			uint64_t temp = *hres;
 			*hres += (a<<1);
@@ -112,7 +112,7 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 		y0 = y1;
 	}
 
-	printf("0x%d%d %016lx %016lx %d%d\n",cout2, cout1, *hres, *lres, y1, y0);
+	// printf("0x%d%d %016lx %016lx %d%d\n",cout2, cout1, *hres, *lres, y1, y0);
 }
 
 void srl_128( bool c1, uint64_t *h_64, uint64_t *l_64) {
