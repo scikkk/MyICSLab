@@ -11,7 +11,8 @@ void py_mod(uint64_t a,uint64_t b, uint64_t m ){
 	assert(fp);
 	char buf[100];
 	fscanf(fp, "%s", buf);
-	printf("py_mod returns: %s\n", buf);
+//	printf("py_mod returns: %s\n", buf);
+	printf("%s\n", buf);
 	pclose(fp);
 	/* FILE *fp = popen("python3 -c 'print(10**10 - 1)'", "r"); */
 	/* assert(fp); */
