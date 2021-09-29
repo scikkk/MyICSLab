@@ -55,7 +55,7 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 					cout1 = 1;
 				}
 			}
-			if ((a >> 63) == 1){
+			if ((a & 0x8000000000000000) != (a & 0x4000000000000000)){
 				if (cout1) {
 					cout1 = 0;
 					cout2 = 1;
@@ -83,7 +83,7 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 					cout2 = 1;
 				}
 			}
-			if ((a >> 63) == 1) {
+			if ((a & 0x8000000000000000) != (a & 0x4000000000000000)) {
 				if (cout1) {
 					cout1 = 0;
 
