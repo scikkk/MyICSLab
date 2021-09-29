@@ -49,7 +49,7 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 			if (temp > *hres){
 				if (cout1){
 					cout1 = 0;
-					cout2 = 1;
+					cout2 = !cout2;
 				}
 				else {
 					cout1 = 1;
