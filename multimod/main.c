@@ -11,12 +11,12 @@ void test(uint64_t a, uint64_t b, uint64_t m) {
 
 int main() {
 
-	/* test(123, 452222222222226, 789); */
+	test(123, 4526, 789);
 	/* test(-2ULL, 4, 415); */ 
 	/* test(14258, -2ULL, 1425); */ 
 	/* test(123, 456, -1ULL); */
 	/* test(41258, -2ULL, -1ULL); */
 	/* test(-2ULL, 102485, -1ULL); */
 	/* test(-2ULL, -2ULL, 142558); */
-	test(-2ULL, -2ULL, -1ULL); // should be 1
+//	test(-2ULL, -2ULL, -1ULL); // should be 1
 }
