@@ -8,12 +8,15 @@ void srl_128(bool, uint64_t*, uint64_t*);
 
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
 	printf("0x%016lx %016lx\n", a, b);
-	while(a >= m) {
+	short count = 0;
+	while(a >= m && count < 1000) {
 		a -= m;
+		count++;
 		//	printf("%lu\n",a);
 	}
-	while(b >= m) {
+	while(b >= m && count < 2000) {
 		b -= m;
+		count++;
 		// printf("%lu\n", b);
 	}
 	uint64_t *h_64 = (uint64_t*)malloc(8);
