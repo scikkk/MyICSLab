@@ -4,9 +4,7 @@
 #include <stdio.h>
 void multiply_128(uint64_t, uint64_t, uint64_t*, uint64_t*);
 void module_128(uint64_t*, uint64_t*, uint64_t);
-void srl_128(uint64_t*, uint64_t*,bool);
-bool add_128(uint64_t*, unsigned);
-void sub_128(uint64_t*, uint64_t*, unsigned);
+void srl_128(bool, uint64_t*, uint64_t*);
 
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
 	printf("0x%016lx %016lx\n", a, b);
@@ -46,52 +44,75 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 		y1 = *lres&0x1;
 		printf("0x%d%d %016lx %016lx %d%d\n",cout2, cout1, *hres, *lres, y1, y0);
 		if (y0-y1==1) {
-			add_128(hres, a);
+			uint64_t temp = *hres;
+			*hres += (a<<1);
+			if (temp > *hres){
+				if (cout1){
+					cout1 = 0;
+					cout2 = 1;
+				}
+				else {
+					cout1 = 1;
+				}
+			}
+			if ((a >> 63) == 1){
+				if (cout1) {
+					cout1 = 0;
+					cout2 = 1;
+				}
+				else {
+					cout1 = 1;
+				}
+
+			}
 		}
 		else if (y1 - y0 == 1){
 			uint64_t temp = *hres;
-			*hres-= a;
-			cin = *hres > temp;
+			*hres-= (a<<1);
+			if(*hres > temp) {
+				if (cout1) {
+					cout1 = 0;
+
+				}
+				else if(cout2) {
+					cout1 = 1;
+					cout2 = 0;
+				}
+				else {
+					cout1 = 1;
+					cout2 = 1;
+				}
+			}
+			if ((a >> 63) == 1) {
+				if (cout1) {
+					cout1 = 0;
+
+				}
+				else if(cout2) {
+					cout1 = 1;
+					cout2 = 0;
+				}
+				else {
+					cout1 = 1;
+					cout2 = 1;
+				}
+			}
 		}
-		srl_128(hres,lres,cin);
-		cin = 0;
+		srl_128(cout1, hres,lres);
+		cout1 = cout2;
 		y0 = y1;
 	}
 }
 
-void srl_128(uint64_t *h_64, uint64_t *l_64, bool cin ) {
+void srl_128( bool c1, uint64_t *h_64, uint64_t *l_64) {
 	*l_64 >>= 1;
 	if ((*h_64&0x1)== 1) {
 		*l_64 |= 0x8000000000000000;
 	} 
-	if ((*h_64>>63)==1){
-
-		*h_64 >>= 1;
+	*h_64 >>= 1;
+	if (c1 ){
 		*h_64 |= 0x8000000000000000; 
 	}
-	else{
-		*h_64 >>= 1;
-	}
-
-	if (cin) {
-		*h_64 |= 0x8000000000000000; 
-
-	}
 }
 
-bool add_128(uint64_t *h_64, unsigned num) {
-	uint64_t temp = *h_64;
-	*h_64 += num;
-	if (*h_64 < temp) {
-		return 1;
-	}
-	return 0;
-}
 
-void sub_128(uint64_t *h_64, uint64_t *l_64, unsigned num) {
-	uint64_t temp = *l_64;
-	*l_64 -= num;
-	if (*l_64 > temp) {
-		*h_64 -= 1;
-	}
-}
