@@ -4,7 +4,7 @@
 #include <stdio.h>
 void multiply_128(uint64_t, uint64_t, uint64_t*, uint64_t*);
 void module_128(uint64_t*, uint64_t*, uint64_t);
-void srl_128(uint64_t*, uint64_t*);
+void srl_128(uint64_t*, uint64_t*,bool);
 bool add_128(uint64_t*, unsigned);
 void sub_128(uint64_t*, uint64_t*, unsigned);
 
@@ -36,7 +36,9 @@ void module_128(uint64_t* h_64, uint64_t* l_64, uint64_t m){
 
 void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 	*hres &= 0x0;
+
 	*lres = b;
+	bool cin = 0;
 	short y0 = 0,y1;
 	for (int k = 0; k < 64; k++) {
 		y1 = *lres&0x1;
@@ -45,14 +47,17 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 			add_128(hres, a);
 		}
 		else if (y1 - y0 == 1){
+			uint64_t temp = *hres;
 			*hres-= a;
+			cin = *hres > temp;
 		}
-		srl_128(hres,lres);
+		srl_128(hres,lres,cin);
+		cin = 0;
 		y0 = y1;
 	}
 }
 
-void srl_128(uint64_t *h_64, uint64_t *l_64 ) {
+void srl_128(uint64_t *h_64, uint64_t *l_64, bool cin ) {
 	*l_64 >>= 1;
 	if ((*h_64&0x1)== 1) {
 		*l_64 |= 0x8000000000000000;
@@ -64,6 +69,11 @@ void srl_128(uint64_t *h_64, uint64_t *l_64 ) {
 	}
 	else{
 		*h_64 >>= 1;
+	}
+
+	if (cin) {
+		*h_64 |= 0x8000000000000000; 
+
 	}
 }
 
