@@ -38,7 +38,7 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 			add_128(hres, a);
 		}
 		else if (y1 - y0 == 1){
-		*hres-= a
+		*hres-= a;
 		}
 		srl_128(hres,lres);
 		y0 = y1;
