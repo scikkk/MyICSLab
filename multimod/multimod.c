@@ -39,13 +39,13 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 	*lres = b;
 	short y0 = 0,y1;
 	for (int k = 0; k < 64; k++) {
-	printf("0x%016lx %016lx %d\n", *hres, *lres, y0);
-        y1 = *lres&0x1;
+		y1 = *lres&0x1;
+		printf("0x%016lx %016lx %d%d\n", *hres, *lres, y1, y0);
 		if (y0-y1==1) {
 			add_128(hres, a);
 		}
 		else if (y1 - y0 == 1){
-		*hres-= a;
+			*hres-= a;
 		}
 		srl_128(hres,lres);
 		y0 = y1;
@@ -58,12 +58,12 @@ void srl_128(uint64_t *h_64, uint64_t *l_64 ) {
 		*l_64 |= 0x8000000000000000;
 	} 
 	if ((*h_64>>63)==1){
-	
-	*h_64 >>= 1;
-	*h_64 |= 0x8000000000000000; 
+
+		*h_64 >>= 1;
+		*h_64 |= 0x8000000000000000; 
 	}
 	else{
-	*h_64 >>= 1;
+		*h_64 >>= 1;
 	}
 }
 
