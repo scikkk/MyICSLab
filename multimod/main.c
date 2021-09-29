@@ -12,7 +12,7 @@ void test(uint64_t a, uint64_t b, uint64_t m) {
 
 int main() {
 
-	test(1245143, 44522526, -1ULL);
+	test(12451142545243, 441452487522526, -1ULL);
 	/* test(-2ULL, 4, 415); */ 
 	/* test(14258, -2ULL, 1425); */ 
 	/* test(123, 456, -1ULL); */
