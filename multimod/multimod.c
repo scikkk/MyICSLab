@@ -24,6 +24,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
 
 void module_128(uint64_t* h_64, uint64_t* l_64, uint64_t m){
 	uint64_t temp_l;
+	while (*h_64 >= m) {*h_64 -= m;}
 	while(*h_64 != 0) {
 		temp_l = *l_64;
 		*l_64 -= m;
@@ -38,11 +39,12 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 	*hres &= 0x0;
 
 	*lres = b;
-	bool cin = 0;
+	bool cout1 = 0;
+	bool cout2 = 0;
 	short y0 = 0,y1;
-	for (int k = 0; k < 64; k++) {
+	for (int k = 0; k < 65; k++) {
 		y1 = *lres&0x1;
-		printf("0x%016lx %016lx %d%d\n", *hres, *lres, y1, y0);
+		printf("0x%d%d %016lx %016lx %d%d\n",cout2, cout1, *hres, *lres, y1, y0);
 		if (y0-y1==1) {
 			add_128(hres, a);
 		}
