@@ -32,7 +32,7 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 	*hres &= 0x0;
 	*lres = b;
 	bool cin = 0;
-	for (int k = 0; k < 32; k++) {
+	for (int k = 0; k < 64; k++) {
 		if ((*lres&0x1) == 1) {
 			cin = add_128(hres, a);
 		}
