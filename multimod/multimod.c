@@ -26,7 +26,7 @@ void module_128(uint64_t* h_64, uint64_t* l_64, uint64_t m){
 			*h_64 -= 1;
 		}
 	}
-	while (*l_64 > m) {*l_64 -= m;}
+	while (*l_64 >= m) {*l_64 -= m;}
 }
 
 void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
