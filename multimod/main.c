@@ -18,14 +18,14 @@ int main() {
 	/* 	test(1452288, 5, 2013); */ 
 	/* 	test(2, -2ULL, -1ULL); */ 
 	/* 	test(1452, -2ULL, -1ULL); */ 
+	/* test(123, 456, -1ULL); */
+	/* test(41258, -2ULL, -1ULL); */
 	/* 	test(-2ULL, 14, -1ULL); */ 
 	/* 	test(-2ULL, 414251455, -1ULL); */ 
 	/* 	test(14521452145214, 1452142145, -1ULL); */ 
 	/* test(12451145243, 441487522526, -1ULL); */
 //	test(-2ULL, 4, 415); 
 //	test(14258, -2ULL, 1425); 
-	test(123, 456, -1ULL);
-	test(41258, -2ULL, -1ULL);
 	test(-2ULL, 102485, -1ULL);
 	test(-2ULL, -2ULL, 142558);
 	test(-2ULL, -2ULL, -1ULL); // should be 1
