@@ -37,7 +37,7 @@ void module_128(uint64_t* h_64, uint64_t* l_64, uint64_t m){
 	while (len_0 >= 0){
 		while (*h_64 >= (m<<len_0)) {
 			*h_64 -= (m<<len_0);
-			printf("0x%016lx %016lx\n", *h_64, *l_64);
+		//	printf("0x%016lx %016lx\n", *h_64, *l_64);
 		}
 		len_0--;
 	}
@@ -49,7 +49,7 @@ void module_128(uint64_t* h_64, uint64_t* l_64, uint64_t m){
 			if (*l_64 > temp_l) {
 				*h_64 -= 1;
 			}
-			printf("0x%016lx %016lx\n", *h_64, *l_64);
+		//	printf("0x%016lx %016lx\n", *h_64, *l_64);
 		}
 		len_0--;
 	}
