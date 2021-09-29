@@ -9,14 +9,14 @@ bool add_128(uint64_t*, unsigned);
 void sub_128(uint64_t*, uint64_t*, unsigned);
 
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
-	printf("0x%lx%lx\n", a, b);
-	while(a >= m) {a -= m;}
-	while(b >= m) {b -= m;}
+	printf("0x%lx %lx\n", a, b);
+	while(a >= m) {a -= m;printf("%lu\n",a);}
+	while(b >= m) {b -= m;printf("%lu\n", b);}
 	uint64_t *h_64 = (uint64_t*)malloc(8);
 	uint64_t *l_64 = (uint64_t*)malloc(8);
-	printf("0x%lx%lx\n", a, b);
+	printf("0x%lx %lx\n", a, b);
 	multiply_128(a, b, h_64, l_64);
-	printf("0x%lx%lx\n", *h_64, *l_64);
+	printf("0x%lx %lx\n", *h_64, *l_64);
 	module_128(h_64, l_64, m);
 	// return (a * b) % m; // buggy
 	return *l_64;
