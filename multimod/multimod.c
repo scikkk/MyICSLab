@@ -9,14 +9,14 @@ bool add_128(uint64_t*, unsigned);
 void sub_128(uint64_t*, uint64_t*, unsigned);
 
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
-	printf("0x%-16lx %-16lx\n", a, b);
+	printf("0x%016lx %016lx\n", a, b);
 	while(a >= m) {a -= m;printf("%lu\n",a);}
 	while(b >= m) {b -= m;printf("%lu\n", b);}
 	uint64_t *h_64 = (uint64_t*)malloc(8);
 	uint64_t *l_64 = (uint64_t*)malloc(8);
-	printf("0x%-16lx %-16lx\n", a, b);
+	printf("0x%016lx %016lx\n", a, b);
 	multiply_128(a, b, h_64, l_64);
-	printf("0x%016lx %-16lx\n", *h_64, *l_64);
+	printf("0x%016lx %016lx\n", *h_64, *l_64);
 	module_128(h_64, l_64, m);
 	// return (a * b) % m; // buggy
 	return *l_64;
@@ -39,7 +39,7 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 	*lres = b;
 	short y0 = 0,y1;
 	for (int k = 0; k < 64; k++) {
-	printf("0x%-16lx %-16lx %d\n", *hres, *lres, y0);
+	printf("0x%016lx %016lx %d\n", *hres, *lres, y0);
         y1 = *lres&0x1;
 		if (y0-y1==1) {
 			add_128(hres, a);
