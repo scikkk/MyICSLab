@@ -5,8 +5,9 @@
 uint64_t multimod(uint64_t, uint64_t, uint64_t);
 void py_mod(uint64_t, uint64_t, uint64_t);
 void test(uint64_t a, uint64_t b, uint64_t m) {
-	py_mod(a,b,m);
 	printf("(" U64 " * " U64 ") mod " U64 " = " U64 "\n\n", a, b, m, multimod(a, b, m));
+
+	py_mod(a,b,m);
 }
 
 int main() {
