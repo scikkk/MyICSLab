@@ -8,7 +8,7 @@ void test(uint64_t a, uint64_t b, uint64_t m) {
 	py_mod(a,b,m);
 
 	// printf("(" U64 " * " U64 ") mod " U64 " = " U64 "\n\n", a, b, m, multimod(a, b, m));
-	 printf( U64 "\n", multimod(a, b, m));
+	 printf( U64 "\n\n", multimod(a, b, m));
 }
 
 int main() {
@@ -29,5 +29,5 @@ int main() {
 	/* test(12451145243, 441487522526, -1ULL); */
 	/* test(-2ULL, 4, 415); */ 
 	test(-2ULL, 102485, -1ULL);
-//	test(-2ULL, -2ULL, -1ULL); // should be 1
+	test(-2ULL, -2ULL, -1ULL); // should be 1
 }
