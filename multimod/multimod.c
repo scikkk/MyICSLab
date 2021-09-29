@@ -1,7 +1,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
-
+#include <stdio.h>
 void multiply_128(uint64_t, uint64_t, uint64_t*, uint64_t*);
 void module_128(uint64_t*, uint64_t*, uint64_t);
 void srl_128(uint64_t*, uint64_t*);
