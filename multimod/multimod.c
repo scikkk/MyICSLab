@@ -4,7 +4,7 @@
 
 void multiply_128(uint64_t, uint64_t, uint64_t*, uint64_t*);
 void module_128(uint64_t*, uint64_t*, uint64_t);
-void srl_128(uint64_t*, uint64_t*, bool);
+void srl_128(uint64_t*, uint64_t*);
 bool add_128(uint64_t*, unsigned);
 void sub_128(uint64_t*, uint64_t*, unsigned);
 
@@ -31,23 +31,26 @@ void module_128(uint64_t* h_64, uint64_t* l_64, uint64_t m){
 void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 	*hres &= 0x0;
 	*lres = b;
-	bool cin = 0;
+	short y0 = 0,y1;
 	for (int k = 0; k < 64; k++) {
-		if ((*lres&0x1) == 1) {
-			cin = add_128(hres, a);
+		y0 = y1;
+        y1 = *lres&0x1
+		if (y0-y1==1) {
+			add_128(hres, a);
 		}
-		srl_128(hres,lres,cin);
-		cin = 0;
+		else if (y1 - y0 == 1){
+		sub_128(hres, lres, a);
+		}
+		srl_128(hres,lres);
 	}
 }
 
-void srl_128(uint64_t *h_64, uint64_t *l_64, bool cin) {
+void srl_128(uint64_t *h_64, uint64_t *l_64 ) {
 	*l_64 >>= 1;
 	if ((*h_64&0x1)== 1) {
 		*l_64 |= 0x1000000000000000;
-	}
+	} 
 	*h_64 >>= 1;
-	if (cin) {*h_64 |= 0x1000000000000000;}	
 }
 
 bool add_128(uint64_t *h_64, unsigned num) {
