@@ -31,9 +31,15 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
 
 void module_128(uint64_t* h_64, uint64_t* l_64, uint64_t m){
 	uint64_t temp_l;
-	while (*h_64 >= m) {
-		*h_64 -= m;
-		printf("0x%016lx %016lx\n", *h_64, *l_64);
+	short len = 64;
+	while((m>>(len-1))==0) {len--;}
+	len = 64 - len;
+	while (len >= 0){
+		while (*h_64 >= (m<<len)) {
+			*h_64 -= (m<<len);
+			printf("0x%016lx %016lx\n", *h_64, *l_64);
+		}
+		len--;
 	}
 	while(*h_64 != 0) {
 		temp_l = *l_64;
