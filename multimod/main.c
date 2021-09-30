@@ -16,8 +16,10 @@ void test(uint64_t a, uint64_t b, uint64_t m) {
 	if (strcmp(right, mymod) != 0) {
 		printf("Failure!");
 		printf("right: %s\nmymod: %s\n", right, mymod);
-
 	} 
+	else {
+		printf("Success!\n");
+	}
 	//	printf("right: %s\nmymod: "  U64 "\n", right,myres);
 	//	printf("(" U64 " * " U64 ") mod " U64 " = " U64 "\n\n", a, b, m, multimod(a, b, m));
 }
