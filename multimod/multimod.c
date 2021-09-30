@@ -114,9 +114,6 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 			}
 		}
 		else if (y1 - y0 == 1){
-			//	uint64_t temp = *hres;
-			//	*hres-= (a<<1);
-
 			uint64_t h_63_0 = *hres;
 			h_63_0 >>= 1;
 			if (cout1) {h_63_0 |= 0x8000000000000000;}
@@ -135,37 +132,6 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 			    *hres <<= 1;
 				*hres |= 0x1;
 			}
-			/*
-			   if(*hres > temp) {
-			   if (cout1) {
-			   cout1 = 0;
-
-			   }
-			   else if(cout2) {
-			   cout1 = 1;
-			   cout2 = 0;
-			   }
-			   else {
-			   cout1 = 1;
-			   cout2 = 1;
-			   }
-			   }
-
-			   if ((a & 0x8000000000000000) != (a & 0x4000000000000000)) {
-			   if (cout1) {
-			   cout1 = 0;
-
-			   }
-			   else if(cout2) {
-			   cout1 = 1;
-			   cout2 = 0;
-			   }
-			   else {
-			   cout1 = 1;
-			   cout2 = 1;
-			   }
-			   }
-			   */
 		}
 		printf("0x%d%d %016lx %016lx %d%d\n\n",cout2, cout1, *hres, *lres, y1, y0);
 		srl_128(cout1, hres,lres);
