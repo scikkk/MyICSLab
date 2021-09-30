@@ -28,6 +28,6 @@ int main() {
 	/* test(-2ULL, 414251455, -1ULL); */ 
 	/* test(14521452145214, 1452142145, -1ULL); */ 
 	/* test(12451145243, 441487522526, -1ULL); */
-	test(-2ULL, 4, 415); 
-//	test(-2ULL, -2ULL, -1ULL); // should be 1
+	/* test(-2ULL, 4, 415); */ 
+	test(-2ULL, -2ULL, -1ULL); // should be 1
 }
