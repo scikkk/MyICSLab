@@ -25,9 +25,9 @@ int main() {
 	uint64_t a, b, m; 
 	srand((unsigned)time(NULL));
 	for (int k = 0; k < NUM ; k++) {
-		a = rand() - 999;
-		b = rand() - 999;
-		m = rand() - 999;
+		a = rand()*9999 - 10000;
+		b = rand()*9999 - 10000;
+		m = rand()*9999 - 10000;
 		test(a, b, m);
 	}
 	test(-2ULL, -2ULL, -1ULL); // should be 1
