@@ -76,17 +76,19 @@ void module_128(uint64_t* h_64, uint64_t* l_64, uint64_t m){
 			if ((*l_64 & 0x1) == 0) {
 				srl_128(0,h_64,l_64);
                 r_num++;
+				printf(">>1: 0x%016lx %016lx\n", *h_64, *l_64);
 			}
 		}
         *h_64 <<= r_num;
 	   	*h_64 |= *l_64 >> (64 - r_num);
 		*l_64 <<= r_num;
+				printf("<<%d: 0x%016lx %016lx\n\n", r_num,*h_64, *l_64);
 		r_num = 0;
 		len_0--;
 	}
 	while(*l_64 >= m) {
 		*l_64 -= m;
-		//	printf("0x%016lx %016lx\n", *h_64, *l_64);
+		printf("0x%016lx %016lx\n", *h_64, *l_64);
 	}
 }
 
