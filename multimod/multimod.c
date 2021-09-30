@@ -63,7 +63,7 @@ void module_128(uint64_t* h_64, uint64_t* l_64, uint64_t m){
 		len_0--;
 	}
 	len_0 = 64 - len;
-	while (len_0 > 0){
+	while (len_0 >= 0){
 		while (*h_64 != 0 || *l_64 >= (m<<len_0)) {
 			temp_l = *l_64;
 			*l_64 -= (m<<len_0);
