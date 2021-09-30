@@ -5,15 +5,13 @@
 #include <assert.h>
 #define U64 "%" PRIu64
 
-void py_mod(uint64_t a,uint64_t b, uint64_t m , char *res){
-	char exec[120];
+void py_mod( char *res){
 	/* sprintf(exec, "python3 -c 'print((" U64 "*" U64 ")%%" U64 ")'", a,b,m); */
 //	printf("%s\n",exec);
-	FILE *fp = popen(exec, "r");
+	FILE *fp = popen(res, "r");
 	assert(fp);
 	char buf[100];
 	fscanf(fp, "%s", buf);
-	printf("(" U64 " * " U64 ") mod " U64 " = %s\n\n", a, b, m, buf);
 //	printf("py_mod returns: %s\n", buf);
 //	printf("%s\n", buf);
     strcpy(res, buf);
