@@ -12,7 +12,7 @@ void test(uint64_t a, uint64_t b, uint64_t m) {
 }
 
 int main() {
-	test(-2ULL, 102485, -1ULL);
+	/* test(-2ULL, 102485, -1ULL); */
 //	test(201300008, 13851256176, -1ULL); 
 //	test(12014254782, 203536673, -1ULL); 
 	test(4102155485214, 1425, -1ULL); 
