@@ -5,7 +5,7 @@
 #include <assert.h>
 void py_mod(uint64_t a,uint64_t b, uint64_t m , char *res){
 	char exec[120];
-	sprintf(exec, "python3 -c 'print((%lu*%lu)%%%lu)'", a,b,m);
+	sprintf(exec, "python3 -c 'print((%llu*%llu)%%%llu)'", a,b,m);
 //	printf("%s\n",exec);
 	FILE *fp = popen(exec, "r");
 	assert(fp);
