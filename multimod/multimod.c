@@ -95,9 +95,9 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 			h_63_0 >>= 1;
 			if (cout1) {h_63_0 |= 0x8000000000000000;}
 			uint64_t temp = h_63_0;
-			printf("%016lx\n",temp);
+			printf("temp: %016lx\n",temp);
 			h_63_0 += a;
-			printf("%016lx\n",h_63_0);
+			printf("h_63_0: %016lx\n",h_63_0);
 			if ((temp > h_63_0&&(a>>63)==0x0)||((temp < h_63_0)&&(a>>63)==0x1)) {cout2 = !cout2;}
 			cout1 = ((h_63_0&0x8000000000000000) == 0x8000000000000000);
 			if ((*hres & 0x1) == 0){
@@ -115,9 +115,9 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 			h_63_0 >>= 1;
 			if (cout1) {h_63_0 |= 0x8000000000000000;}
 			uint64_t temp = h_63_0;
-			printf("%016lx\n",temp);
+			printf("temp: %016lx\n",temp);
 			h_63_0 -= a;
-			printf("%016lx\n",h_63_0);
+			printf("h_63_0: %016lx\n",h_63_0);
 			if ((temp < h_63_0&&(a>>63)==0x0)||((temp > h_63_0)&&(a>>63)==0x1)) {cout2 = !cout2;}
 			cout1 = ((h_63_0&0x8000000000000000) == 0x8000000000000000);
 			if ((*hres & 0x1) == 0){
