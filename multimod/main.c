@@ -17,7 +17,7 @@ void test(uint64_t a, uint64_t b, uint64_t m) {
 //		printf("Failure!");
 //		printf("right: %s\nmymod: %s\n", right, mymod);
 //	} 
-		printf("(%lu * %lu) %% %lu \nright: %s\nmymod: %s\n\n", a, b, m, mymod, myres);
+		printf("(%lu * %lu) %% %lu \nright: %s\nmymod: %s\n\n", a, b, m, right, mymod);
 //	printf("(" U64 " * " U64 ") mod " U64 " = " U64 "\n\n", a, b, m, multimod(a, b, m));
 }
 
