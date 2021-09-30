@@ -92,7 +92,7 @@ void module_128(uint64_t* h_64, uint64_t* l_64, uint64_t m){
 		if (*l_64 > temp_l) {
 			*h_64 -= 1;
 		}
-		printf("0x%016lx %016lx\n", *h_64, *l_64);
+	//	printf("0x%016lx %016lx\n", *h_64, *l_64);
 	}
 }
 
