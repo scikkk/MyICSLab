@@ -3,9 +3,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
+#define U64 "%" PRIu64
+
 void py_mod(uint64_t a,uint64_t b, uint64_t m , char *res){
 	char exec[120];
-	sprintf(exec, "python3 -c 'print((%llu*%llu)%%%llu)'", a,b,m);
+	sprintf(exec, "python3 -c 'print(("U64"*"U64")%%"U64")'", a,b,m);
 //	printf("%s\n",exec);
 	FILE *fp = popen(exec, "r");
 	assert(fp);
