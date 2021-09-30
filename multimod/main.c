@@ -10,7 +10,7 @@ void py_mod(uint64_t, uint64_t, uint64_t, char*);
 void test(uint64_t a, uint64_t b, uint64_t m) {
 	char right[99];
 	py_mod(a,b,m,right);
-	printf("right: " U64 "\n" "mymod: "  U64 "\n", right,multimod(a, b, m));
+	printf("right: %s\n mymod: "  U64 "\n", right,multimod(a, b, m));
 	printf("(" U64 " * " U64 ") mod " U64 " = " U64 "\n\n", a, b, m, multimod(a, b, m));
 }
 
