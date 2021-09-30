@@ -11,7 +11,7 @@ void test(uint64_t a, uint64_t b, uint64_t m) {
 	char right[99];
 	py_mod(a,b,m,right);
 	printf("right: %s\nmymod: "  U64 "\n", right,multimod(a, b, m));
-	printf("(" U64 " * " U64 ") mod " U64 " = " U64 "\n\n", a, b, m, multimod(a, b, m));
+//	printf("(" U64 " * " U64 ") mod " U64 " = " U64 "\n\n", a, b, m, multimod(a, b, m));
 }
 
 int main() {
