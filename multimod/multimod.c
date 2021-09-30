@@ -44,7 +44,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
 	uint64_t *l_64 = (uint64_t*)malloc(8);
 	// printf("0x%016lx %016lx\n", a, b);
 	multiply_128(a, b, h_64, l_64);
-	printf("0x%016lx %016lx\n", *h_64, *l_64);
+//	printf("0x%016lx %016lx\n", *h_64, *l_64);
 	module_128(h_64, l_64, m);
 	// return (a * b) % m; // buggy
 	return *l_64;
