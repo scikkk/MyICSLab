@@ -10,7 +10,7 @@ uint64_t multimod(uint64_t, uint64_t, uint64_t);
 void py_mod(uint64_t, uint64_t, uint64_t, char*);
 void test(uint64_t a, uint64_t b, uint64_t m) {
 	char right[99];
-  // char 	mymod[99];
+ //  char 	mymod[99];
 	py_mod(a,b,m,right);
 	uint64_t myres = multimod(a, b, m);
 //	sprintf(mymod, "%lu", myres);
