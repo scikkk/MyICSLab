@@ -121,6 +121,7 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 			h_63_0 >>= 1;
 			if (cout1) {h_63_0 |= 0x8000000000000000;}
 			uint64_t temp = h_63_0;
+			printf("%016lx\n",temp);
 			h_63_0 -= a;
 			if (temp < h_63_0) {cout2 = !cout2;}
 			cout1 = ((h_63_0^0x8000000000000000) == 1);
