@@ -89,7 +89,7 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 	short y0 = 0,y1;
 	for (int k = 0; k < 65; k++) {
 		y1 = *lres&0x1;
-		// printf("0x%d%d %016lx %016lx %d%d\n",cout2, cout1, *hres, *lres, y1, y0);
+		 printf("0x%d%d %016lx %016lx %d%d\n",cout2, cout1, *hres, *lres, y1, y0);
 		if (y0-y1==1) {
 			uint64_t temp = *hres;
 			*hres += (a<<1);
