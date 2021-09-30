@@ -6,7 +6,7 @@
 void py_mod(uint64_t a,uint64_t b, uint64_t m ){
 	char exec[120];
 	sprintf(exec, "python3 -c 'print((%lu*%lu)%%%lu)'", a,b,m);
-	printf("%s\n",exec);
+//	printf("%s\n",exec);
 	FILE *fp = popen(exec, "r");
 	assert(fp);
 	char buf[100];
