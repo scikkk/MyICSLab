@@ -3,7 +3,7 @@
 #include <inttypes.h>
 #include <time.h>
 #define U64 "%" PRIu64
-#define NUM 100;
+#define NUM 100
 uint64_t multimod(uint64_t, uint64_t, uint64_t);
 void py_mod(uint64_t, uint64_t, uint64_t);
 void test(uint64_t a, uint64_t b, uint64_t m) {
@@ -14,7 +14,7 @@ void test(uint64_t a, uint64_t b, uint64_t m) {
 
 int main() {
 	int a, b, m; 
-	for (int k = 0; k < NUM; k++) {
+	for (int k = 0; k < NUM ; k++) {
     srand((unsigned)time(NULL));
 	a = rand();
 	b = rand();
