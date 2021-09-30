@@ -6,7 +6,7 @@
 #define U64 "%" PRIu64
 #define NUM 10
 uint64_t multimod(uint64_t, uint64_t, uint64_t);
-void py_mod(uint64_t, uint64_t, uint64_t);
+void py_mod(uint64_t, uint64_t, uint64_t, char*);
 void test(uint64_t a, uint64_t b, uint64_t m) {
 	char right[99];
 	py_mod(a,b,m,right);
