@@ -127,10 +127,12 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 			if (temp < h_63_0) {cout2 = !cout2;}
 			cout1 = ((h_63_0&0x8000000000000000) == 1);
 			if ((*hres & 0x1) == 0){
-				*hres = (h_63_0 << 1);
+				*hres = h_63_0;
+				*hres <<= 1;
 			}
 			else {
-				*hres = (h_63_0 << 1);
+				*hres = h_63_0;
+			    *hres <<= 1;
 				*hres |= 0x1;
 			}
 			/*
