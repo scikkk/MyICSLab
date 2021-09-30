@@ -20,7 +20,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
 	count++;
 	// printf("%lu\n", b);
 	}
-*/
+	*/
 	short len = 64;
 	while((m>>(len-1))==0) {len--;}
 	short len_0 = 64 - len;
@@ -39,7 +39,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
 		}
 		len_0--;
 	}
-	
+
 	uint64_t *h_64 = (uint64_t*)malloc(8);
 	uint64_t *l_64 = (uint64_t*)malloc(8);
 	// printf("0x%016lx %016lx\n", a, b);
@@ -89,7 +89,7 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 	short y0 = 0,y1;
 	for (int k = 0; k < 65; k++) {
 		y1 = *lres&0x1;
-		 printf("0x%d%d %016lx %016lx %d%d\n",cout2, cout1, *hres, *lres, y1, y0);
+		printf("0x%d%d %016lx %016lx %d%d\n",cout2, cout1, *hres, *lres, y1, y0);
 		if (y0-y1==1) {
 			uint64_t temp = *hres;
 			*hres += (a<<1);
@@ -114,62 +114,62 @@ void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
 			}
 		}
 		else if (y1 - y0 == 1){
-		//	uint64_t temp = *hres;
-		//	*hres-= (a<<1);
+			//	uint64_t temp = *hres;
+			//	*hres-= (a<<1);
 
 			uint64_t h_63_0 = *hres;
 			h_63_0 >>= 1;
-uint64_t temp = h_63_0;
 			if (cout1) {h_63_0 |= 0x8000000000000000;}
+			uint64_t temp = h_63_0;
 			h_63_0 -= a;
-            if (temp < h_63_0) {cout2 = !cout2;}
-            cout1 = ((h_63_0^0x8000000000000000) == 1);
+			if (temp < h_63_0) {cout2 = !cout2;}
+			cout1 = ((h_63_0^0x8000000000000000) == 1);
 			if ((*hres & 0x1) == 0){
-			*hres &= (h_63_0 << 1);
+				*hres &= (h_63_0 << 1);
 			}
 			else {
-			 *hres &= (h_63_0 << 1);
-			 *hres |= 0x1;
+				*hres &= (h_63_0 << 1);
+				*hres |= 0x1;
 			}
 			/*
-			if(*hres > temp) {
-				if (cout1) {
-					cout1 = 0;
+			   if(*hres > temp) {
+			   if (cout1) {
+			   cout1 = 0;
 
-				}
-				else if(cout2) {
-					cout1 = 1;
-					cout2 = 0;
-				}
-				else {
-					cout1 = 1;
-					cout2 = 1;
-				}
-			}
-			
-			if ((a & 0x8000000000000000) != (a & 0x4000000000000000)) {
-				if (cout1) {
-					cout1 = 0;
+			   }
+			   else if(cout2) {
+			   cout1 = 1;
+			   cout2 = 0;
+			   }
+			   else {
+			   cout1 = 1;
+			   cout2 = 1;
+			   }
+			   }
 
-				}
-				else if(cout2) {
-					cout1 = 1;
-					cout2 = 0;
-				}
-				else {
-					cout1 = 1;
-					cout2 = 1;
-				}
-			}
-			*/
+			   if ((a & 0x8000000000000000) != (a & 0x4000000000000000)) {
+			   if (cout1) {
+			   cout1 = 0;
+
+			   }
+			   else if(cout2) {
+			   cout1 = 1;
+			   cout2 = 0;
+			   }
+			   else {
+			   cout1 = 1;
+			   cout2 = 1;
+			   }
+			   }
+			   */
 		}
-		 printf("0x%d%d %016lx %016lx %d%d\n\n",cout2, cout1, *hres, *lres, y1, y0);
+		printf("0x%d%d %016lx %016lx %d%d\n\n",cout2, cout1, *hres, *lres, y1, y0);
 		srl_128(cout1, hres,lres);
 		cout1 = cout2;
 		y0 = y1;
 	}
 
-	 printf("0x%d%d %016lx %016lx %d%d\n",cout2, cout1, *hres, *lres, y1, y0);
+	printf("0x%d%d %016lx %016lx %d%d\n",cout2, cout1, *hres, *lres, y1, y0);
 }
 
 void srl_128( bool c1, uint64_t *h_64, uint64_t *l_64) {
