@@ -86,10 +86,14 @@ void module_128(uint64_t* h_64, uint64_t* l_64, uint64_t m){
 		r_num = 0;
 		len_0--;
 	}
-	while(*l_64 >= m) {
-		*l_64 -= m;
-		printf("0x%016lx %016lx\n", *h_64, *l_64);
-	}
+while (*h_64 != 0 || *l_64 >= (m<<len_0)) {
+			temp_l = *l_64;
+			*l_64 -= (m<<len_0);
+			if (*l_64 > temp_l) {
+				*h_64 -= 1;
+			}
+				printf("0x%016lx %016lx\n", *h_64, *l_64);
+		}
 }
 
 void multiply_128(uint64_t a, uint64_t b, uint64_t *hres, uint64_t *lres) {
