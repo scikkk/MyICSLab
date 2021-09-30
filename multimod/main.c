@@ -14,12 +14,12 @@ void test(uint64_t a, uint64_t b, uint64_t m) {
 }
 
 int main() {
-	int a, b, m; 
-	for (int k = 0; k < NUM ; k++) {
+	uint64_t a, b, m; 
     srand((unsigned)time(NULL));
-	a = rand();
-	b = rand();
-	m = rand();
+	for (int k = 0; k < NUM ; k++) {
+	a = rand() - 999;
+	b = rand() - 999;
+	m = rand() - 999;
 	test(a, b, m);
 	}
 	test(-2ULL, -2ULL, -1ULL); // should be 1
