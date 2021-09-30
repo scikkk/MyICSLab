@@ -12,13 +12,13 @@ void test(uint64_t a, uint64_t b, uint64_t m) {
 	char right[99], mymod[99];
 	py_mod(a,b,m,right);
 	uint64_t myres = multimod(a, b, m);
-//	sprintf(mymod, "%lu", myres);
+	sprintf(mymod, "%lu", myres);
 //	if (strcmp(right, mymod) != 0) {
 //		printf("Failure!");
 //		printf("right: %s\nmymod: %s\n", right, mymod);
 //	} 
-		printf("(%lu * %lu) %% %lu \nright: %s\nmymod: %lu\n\n", a, b, m, right,myres);
-	//	printf("(" U64 " * " U64 ") mod " U64 " = " U64 "\n\n", a, b, m, multimod(a, b, m));
+		printf("(%lu * %lu) %% %lu \nright: %s\nmymod: %s\n\n", a, b, m, mymod, myres);
+//	printf("(" U64 " * " U64 ") mod " U64 " = " U64 "\n\n", a, b, m, multimod(a, b, m));
 }
 
 int main() {
