@@ -3,7 +3,6 @@
 //#include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
-#define U64 "%" PRIu64
 
 void py_mod(uint64_t a,uint64_t b, uint64_t m , char *res){
 	char exec[120];
