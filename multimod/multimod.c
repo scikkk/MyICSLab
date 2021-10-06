@@ -26,7 +26,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
 	uint64_t *l_64 = &l;
 	multiply_128(a, b, h_64, l_64);
 	module_128(h_64, l_64, m);
-	return *l_64+1;
+	return *l_64;
 }
 
 void module_128(uint64_t* h_64, uint64_t* l_64, uint64_t m){
