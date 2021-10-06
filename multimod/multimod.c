@@ -1,6 +1,6 @@
 /* #include <stdbool.h> */
 #include <stdint.h>
-#include <stdlib.h>
+/* #include <stdlib.h> */
 /* #include <stdio.h> */
 void multiply_128(uint64_t, uint64_t, uint64_t*, uint64_t*);
 void module_128(uint64_t*, uint64_t*, uint64_t);
@@ -39,9 +39,9 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
 		}
 		len_0--;
 	}
-
-	uint64_t *h_64 = (uint64_t*)malloc(8);
-	uint64_t *l_64 = (uint64_t*)malloc(8);
+    uint64_t h, l;
+	uint64_t *h_64 = &h;
+	uint64_t *l_64 = &l;
 	// printf("0x%016lx %016lx\n", a, b);
 	multiply_128(a, b, h_64, l_64);
 //	printf("0x%016lx %016lx\n", *h_64, *l_64);
