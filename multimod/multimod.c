@@ -1,7 +1,7 @@
 #include <stdint.h>
 uint64_t mod(uint64_t a, uint64_t b) {
    if (a < b) {
-   return b;
+   return a;
    }
   else 
   {
