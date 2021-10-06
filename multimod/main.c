@@ -33,7 +33,7 @@ int main() {
 	/* 	m = rand()*9999 - 10000; */
 	/* 	test(a, b, m); */
 	/* } */
-	test(-1ULL, -2ULL, 18452154759);
+	test(-145221ULL, -2ULL, 114528452154759);
 	/* test(-2ULL, -2ULL, -1ULL); // should be 1 */
 }
 
