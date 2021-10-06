@@ -25,14 +25,14 @@ void test(uint64_t a, uint64_t b, uint64_t m) {
 }
 
 int main() {
-	/* uint64_t a, b, m; */ 
-	/* srand((unsigned)time(NULL)); */
-	/* for (int k = 0; k < NUM ; k++) { */
-	/* 	a = rand()*9999 - 10000; */
-	/* 	b = rand()*9999 - 10000; */
-	/* 	m = rand()*9999 - 10000; */
-	/* 	test(a, b, m); */
-	/* } */
+	uint64_t a, b, m; 
+	srand((unsigned)time(NULL));
+	for (int k = 0; k < NUM ; k++) {
+		a = rand()*9999 - 10000;
+		b = rand()*9999 - 10000;
+		m = rand()*9999 - 10000;
+		test(a, b, m);
+	}
 	test(-145221ULL, -2ULL, 114528452154759);
 	/* test(-2ULL, -2ULL, -1ULL); // should be 1 */
 }
