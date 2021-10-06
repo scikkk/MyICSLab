@@ -1,7 +1,22 @@
 #include <stdint.h>
-uint64_t mod(uint64_t sum, uint64_t m) {
-    
-	return sum%m;
+uint64_t mod(uint64_t a, uint64_t b) {
+   if (a < b) {
+   return b;
+   }
+  else 
+  {
+	short len = 64;
+	while((b>>(len-1))==0) {len--;}
+	short len_0 = 64 - len;
+	while (len_0 >= 0){
+		while (a >= (b<<len_0)) {
+			a -= (b<<len_0);
+		
+		}
+		len_0--;
+	}
+	  return a;
+  }
 }
 uint64_t addmod(uint64_t a, uint64_t b, uint64_t m) {
     if (a + b < a || a + b < b) {
