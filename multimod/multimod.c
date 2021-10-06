@@ -1,20 +1,16 @@
 #include <stdint.h>
-uint64_t inplacemod(uint64_t sum, uint64_t m) {
+uint64_t mod(uint64_t sum, uint64_t m) {
     
 	return sum%m;
 }
 uint64_t addmod(uint64_t a, uint64_t b, uint64_t m) {
     if (a + b < a || a + b < b) {
-	 uint64_t res =  inplacemod(a+ b, m) + inplacemod(-1ULL, m);
-	 if (res + 1 < m) {
-	 return res + 1;
-	 }
-	 else {
-	 return 0;
-	 }
+	 uint64_t res =  mod(mod(a+b, m) + mod(-1ULL, m) + 1,m);
+	 
+	 return res;
 	}
 	else {
-	return inplacemod(a+b,m);
+	return mod(a+b,m);
 	}
 }
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
