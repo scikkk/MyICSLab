@@ -17,7 +17,7 @@ int asm_popcnt(uint64_t x) {
 	asm ( "movql %[x] %%eax;"
 			"andl $0x1, %%eax;"
 			"addl %%eax %[s];"
-		"shrq $0x1 %[x]"
+		"shrq 0x1 %[x]"
 		:[s] "=r"(sum),[x] "=r"(x)
 		:
 		: "eax"
