@@ -1,7 +1,6 @@
 #include "asm.h"
 #include <string.h>
 
-#define 
 
 int64_t asm_add(int64_t a, int64_t b) {
 	int64_t ret;
