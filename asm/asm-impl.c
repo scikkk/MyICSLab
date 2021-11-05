@@ -22,9 +22,9 @@ int64_t asm_add(int64_t a, int64_t b) {
 int asm_popcnt(uint64_t x) {
 	int sum = 0, one=1;
 	asm (eight(eight(onebit))
-		:[s] "+r"(sum),[x] "+r"(x)\
-		:"cl"(one)\
-		: "rax", "cl" \
+		:[s] "+r"(sum),[x] "+r"(x)
+		:"cl"(one)
+		: "rax", "cl" 
 		);
 	return sum;
 }
