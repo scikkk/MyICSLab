@@ -11,4 +11,5 @@ int main() {
     assert(r == 123);
     printf("PASSED.\n");
   }
+    printf("END.\n");
 }
