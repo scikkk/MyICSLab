@@ -18,7 +18,7 @@ int asm_popcnt(uint64_t x) {
 			"shr %0x1 %[x]"
 			:[s] "+r"(sum)
 			:[x] "=r"(x)
-	)
+	);
 	return s;
 }
 
