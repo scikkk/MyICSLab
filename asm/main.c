@@ -5,6 +5,7 @@
 int main() {
     assert(asm_add(1234, 5678) == 6912);
     assert(asm_popcnt(0x0123456789abcdefULL) == 32);
+	assert(asm_add(0,0)==1);
     printf("BEGIN.\n");
   asm_jmp_buf buf;
   int r = asm_setjmp(buf);
