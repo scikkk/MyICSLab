@@ -14,12 +14,12 @@ int64_t asm_add(int64_t a, int64_t b) {
 
 int asm_popcnt(uint64_t x) {
 	int sum = 0;
-	asm ( "and $0x1, %%eax;"
+	asm (l1: "and $0x1, %%eax;"
 			"add %%eax %[s];"
 		"shrl $0x1 %[x]"
-		:[s] "+r"(sum), [x] "=r"(x)
+		:[s] "edx"(sum), [x] "=r"(x)
 		: 
-		: "eax"
+		: "eax", "edx", "ecx"
 		);
 	return sum;
 }
