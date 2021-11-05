@@ -13,14 +13,14 @@ int64_t asm_add(int64_t a, int64_t b) {
 }
 
 int asm_popcnt(uint64_t x) {
-	int sum = 0;
+	int sum = 0, one=1;
 	asm ( "movql %[x] %%eax;"
 			"andl $0x1, %%eax;"
 			"addl %%eax %[s];"
-		"shrq $0x1 %[x]"
+		"shrq %%cl %[x]"
 		:[s] "+r"(sum),[x] "+r"(x)
-		:
-		: "eax"
+		:"cl"(one)
+		: "eax", "cl"
 		);
 	return sum;
 }
