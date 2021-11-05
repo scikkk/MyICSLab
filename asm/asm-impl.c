@@ -17,7 +17,7 @@ int asm_popcnt(uint64_t x) {
 	asm ( "and $0x1, %%eax;"
 			"add %%eax %[s];"
 		"shrl $0x1 %[x]"
-		:[s] "edx"(sum), [x] "rax"(x)
+		:[s] "=edx"(sum), [x] "=rax"(x)
 		: 
 		: "eax", "edx", "rax"
 		);
