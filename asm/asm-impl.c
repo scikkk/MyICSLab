@@ -1,6 +1,16 @@
 #include "asm.h"
 #include <string.h>
 
+#define onebit  \
+asm ( "movq %[x], %%rax;" \
+		"and $0x1, %%eax;"\
+		"add %%eax, %[s];"\
+		"shrq %%cl, %[x]"\
+		:[s] "+r"(sum),[x] "+r"(x)\
+		:"cl"(one)\
+		: "rax", "cl" \
+		);
+
 
 int64_t asm_add(int64_t a, int64_t b) {
 	int64_t ret = 0;
@@ -14,14 +24,7 @@ int64_t asm_add(int64_t a, int64_t b) {
 
 int asm_popcnt(uint64_t x) {
 	int sum = 0, one=1;
-	asm ( "movq %[x], %%rax;"
-		"and $0x1, %%eax;"
-		"add %%eax, %[s];"
-		"shrq %%cl, %[x]"
-		:[s] "+r"(sum),[x] "+r"(x)
-		:"cl"(one)
-		: "rax", "cl"
-		);
+	onebit;
 	return sum;
 }
 
