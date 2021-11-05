@@ -5,7 +5,7 @@
 int64_t asm_add(int64_t a, int64_t b) {
 	int64_t ret = 0;
 	asm(
-			"leaq (%[a],%[b],1), %[ret]"
+			"leal (%[a],%[b],1), %[ret]"
 			: [ret] "+r"(ret)
 			: [a] "r"(a), [b] "r"(b)
 	   );
