@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 int main() {
+    printf("BEGIN.\n");
   asm_jmp_buf buf;
   int r = asm_setjmp(buf);
   if (r == 0) {
