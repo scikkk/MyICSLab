@@ -2,14 +2,10 @@
 #include <string.h>
 
 #define onebit  \
-asm ( "movq %[x], %%rax;" \
+ "movq %[x], %%rax;" \
 		"and $0x1, %%eax;"\
 		"add %%eax, %[s];"\
-		"shrq %%cl, %[x]"\
-		:[s] "+r"(sum),[x] "+r"(x)\
-		:"cl"(one)\
-		: "rax", "cl" \
-		);
+		"shrq %%cl, %[x];"\
 
 #define eight(x) x x x x x x x x
 
@@ -25,7 +21,11 @@ int64_t asm_add(int64_t a, int64_t b) {
 
 int asm_popcnt(uint64_t x) {
 	int sum = 0, one=1;
-	eight(eight(onebit));
+	asm (eight(eight(onebit))
+		:[s] "+r"(sum),[x] "+r"(x)\
+		:"cl"(one)\
+		: "rax", "cl" \
+		);
 	return sum;
 }
 
