@@ -11,6 +11,7 @@ asm ( "movq %[x], %%rax;" \
 		: "rax", "cl" \
 		);
 
+#define eight(x) x x x x x x x x
 
 int64_t asm_add(int64_t a, int64_t b) {
 	int64_t ret = 0;
@@ -24,7 +25,7 @@ int64_t asm_add(int64_t a, int64_t b) {
 
 int asm_popcnt(uint64_t x) {
 	int sum = 0, one=1;
-	onebit;
+	eight(eight(onebit));
 	return sum;
 }
 
