@@ -13,13 +13,12 @@ int64_t asm_add(int64_t a, int64_t b) {
 }
 
 int asm_popcnt(uint64_t x) {
-	int s = 0;
-	for (int i = 0; i < 64; i++) {
-		if ((x >> i) & 1) s++;
-	}
-	/* asm ( */
-
-	/* ) */
+	int sum = 0;
+	asm ( "and $0x1, %[s];"
+			"shr %0x1 %[x]"
+			:[s] "+r"(sum)
+			:[x] "=r"(x)
+	)
 	return s;
 }
 
