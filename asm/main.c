@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 int main() {
+	print("%d\n", asm_popcnt(0xff));
     assert(asm_add(1234, 5678) == 6912);
 	assert(asm_popcnt(0x1551451)==1);
 	assert(asm_popcnt(0x155146)==0);
