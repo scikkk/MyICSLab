@@ -15,8 +15,8 @@ int64_t asm_add(int64_t a, int64_t b) {
 int asm_popcnt(uint64_t x) {
 	int sum = 0, one=1;
 	asm ( "movq %[x], %%rax;"
-		"and $0x1, %%rax;"
-		"addq %%rax, %[s];"
+		"and $0x1, %%eax;"
+		"add %%eax, %[s];"
 		"shrq %%cl, %[x]"
 		:[s] "+r"(sum),[x] "+r"(x)
 		:"cl"(one)
