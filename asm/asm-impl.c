@@ -5,7 +5,7 @@
 int64_t asm_add(int64_t a, int64_t b) {
 	int64_t ret = 0;
 	asm(
-			"lea (%[a],%[b],1), %[ret]"
+			"leaq (%[a],%[b],1), %[ret]"
 			: [ret] "+r"(ret)
 			: [a] "r"(a), [b] "r"(b)
 	   );
@@ -16,7 +16,7 @@ int asm_popcnt(uint64_t x) {
 	int sum = 0;
 	asm ( "and $0x1, %%eax;"
 			"add %%eax %[s];"
-		"shrp $0x1 %[x]"
+		"shr $0x1 %[x]"
 		:[s] "=r"(sum), [x] "=r"(x)
 		:
 		: "eax"
