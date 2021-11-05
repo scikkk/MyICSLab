@@ -2,10 +2,10 @@
 #include <string.h>
 
 #define onebit  \
- "movq %[x], %%rax;" \
-		"and $0x1, %%eax;"\
-		"add %%eax, %[s];"\
-		"shrq %%cl, %[x];"\
+ "movq %[x], %%rax\n" \
+		"and $0x1, %%eax\n"\
+		"add %%eax, %[s]\n"\
+		"shrq %%cl, %[x]\n"\
 
 #define eight(x) x x x x x x x x
 
