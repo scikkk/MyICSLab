@@ -84,7 +84,7 @@ int asm_setjmp(asm_jmp_buf env) {
 void asm_longjmp(asm_jmp_buf env, int val) {
 	/* longjmp(env, val); */
 	asm(    
-			"mov 4(%%esp), %%edx;"
+			"movl 4(%%esp), %%edx;"
 			"movl 8(%%esp)  , %%eax;"
 			"test %%eax, %%eax;"
 			"jnz .L1;"
