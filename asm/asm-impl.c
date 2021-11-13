@@ -39,7 +39,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 			"movl %%eax, (%[dest], %%rcx, 4);"
 			"addq $1, %%rcx;"
 			"cmpq %%rcx, %[n];"
-			"jle .cpy;"
+			"jne .cpy;"
 			: 
 			: [n] "r"(n), [dest] "r"(dest), [src] "r"(src)
 			: "eax", "rcx"
