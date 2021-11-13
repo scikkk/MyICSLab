@@ -5,6 +5,7 @@
 int main() {
 	/* printf("\n\nBEGIN.\n"); */
 	asm_jmp_buf buf;
+	buf.ebp = 0;
 	asm_setjmp(buf);
 	/* int r = asm_setjmp(buf); */
 	/* if (r == 0) { */
