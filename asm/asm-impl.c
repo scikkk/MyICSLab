@@ -67,7 +67,7 @@ int asm_setjmp(asm_jmp_buf env) {
 			/* "ret;" */
 			:
 			:			
-			: "ecx"
+			: "ecx", "eax"
 	   );
 	return 0;
 }
