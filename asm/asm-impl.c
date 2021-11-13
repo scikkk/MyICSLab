@@ -50,24 +50,24 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 int asm_setjmp(asm_jmp_buf env) {
 	/* return setjmp(env); */
 	asm(
-			"movl %ecx    , 12(%esp);"
-			"movl 4(%esp) , %ecx;"
-			"movl $0       , (%ecx);"
+			"movl %%ecx    , 12(%%esp);"
+			"movl 4(%%esp) , %%ecx;"
+			"movl $0       , (%%ecx);"
 
-			"movl %ebx    , 4(%ecx);"
-			"movl 12(%esp), %eax;"
-			"movl %eax    , 12(%ecx);"
+			"movl %%ebx    , 4(%%ecx);"
+			"movl 12(%%esp), %%eax;"
+			"movl %%eax    , 12(%%ecx);"
 
-			"movl %edx    , 12(%ecx);"
-			"movl %esi    , 16(%ecx);"
-			"movl %edi    , 20(%ecx);"
-			"movl %ebp    , 24(%ecx);"
-			"movl %esp    , 28(%ecx);"
+			"movl %%edx    , 12(%%ecx);"
+			"movl %%esi    , 16(%%ecx);"
+			"movl %%edi    , 20(%%ecx);"
+			"movl %%ebp    , 24(%%ecx);"
+			"movl %%esp    , 28(%%ecx);"
 
-			"movl (%esp)  , %eax;"
-			"movl %eax    , 32(%ecx);"
+			"movl (%%esp)  , %%eax;"
+			"movl %%eax    , 32(%%ecx);"
 
-			"movl $0 , %eax;"
+			"movl $0 , %%eax;"
 			:
 			:
 			: "ecx"
@@ -77,25 +77,25 @@ int asm_setjmp(asm_jmp_buf env) {
 
 void asm_longjmp(asm_jmp_buf env, int val) {
 	/* longjmp(env, val); */
-	asm(    "movl  4(%esp) , %ecx;"
-			"movl (%ecx)  , %eax;"
+	asm(    "movl  4(%%esp) , %%ecx;"
+			"movl (%%ecx)  , %%eax;"
 
 
-			"movl 4(%ecx)  , %ebx;"
-			"movl 12(%ecx)  , %edx;"
-			"movl 16(%ecx)  , %esi;"
-			"movl 20(%ecx)  , %edi;"
-			"movl 24(%ecx)  , %ebp;"
+			"movl 4(%%ecx)  , %%ebx;"
+			"movl 12(%%ecx)  , %%edx;"
+			"movl 16(%%ecx)  , %%esi;"
+			"movl 20(%%ecx)  , %%edi;"
+			"movl 24(%%ecx)  , %%ebp;"
 
-			"movl 36(%ecx)  , %ecx;"
-			"movl 4(%esp)   , %eax;"
-			"movl %ecx      , (%eax);"
+			"movl 36(%%ecx)  , %%ecx;"
+			"movl 4(%%esp)   , %%eax;"
+			"movl %%ecx      , (%%eax);"
 
-			"movl 4(%esp)   , %ecx;"
-			"movl 32(%ecx)  , %eax;"
-			"movl 28(%ecx)  , %esp;"
+			"movl 4(%%esp)   , %%ecx;"
+			"movl 32(%%ecx)  , %%eax;"
+			"movl 28(%%ecx)  , %%esp;"
 
-			"movl $1 , %eax;"
+			"movl $1 , %%eax;"
 			"ret;"
 	   );
 }
