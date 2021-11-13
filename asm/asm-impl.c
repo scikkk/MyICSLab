@@ -54,15 +54,14 @@ int asm_setjmp(asm_jmp_buf env) {
 	asm(
 			"mov 4(%%esp)  , %%eax;"
 			"mov %%ebx    , (%%eax);"
-			"mov %%edx    , 4(%%eax);"
-			"mov %%esi    , 8(%%eax);"
-			"mov %%edi    , 12(%%eax);"
-			"mov %%ebp    , 16(%%eax);"
+			"mov %%esi    , 4(%%eax);"
+			"mov %%edi    , 8(%%eax);"
+			"mov %%ebp    , 12(%%eax);"
 
 			"leal 4(%%esp) , %%ecx;"
-			"mov %%ecx    , 20(%%eax);"
+			"mov %%ecx    , 16(%%eax);"
 			"mov (%%esp)  , %%ecx;"
-			"mov %%ecx    , 24(%%eax);"
+			"mov %%ecx    , 20(%%eax);"
 			/* "xor %%eax, %%eax;" */
 			/* "ret;" */
 			: 

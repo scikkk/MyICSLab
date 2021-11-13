@@ -5,7 +5,7 @@
 
 typedef struct {
 	void* ebx;
-	void* edx;
+	/* void* edx; */
 	void* esi;
 	void* edi;
 	void* ebp;
