@@ -44,7 +44,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 			: [n] "r"(n), [dest] "r"(dest), [src] "r"(src)
 			: "eax", "ecx"
 	   );
-	return n;
+	return src;
 }
 
 int asm_setjmp(asm_jmp_buf env) {
