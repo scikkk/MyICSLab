@@ -35,8 +35,8 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 	asm(
 			"movl $0 , %%ecx;"
 			"cpy:;"
-			"movl (%[dest]) , %%eax;"
-			"movl %%eax (%[src], 4, %%ecx);"
+			"movl (%[src], 4, %%ecx) , %%eax;"
+			"movl %%eax, (%[dest], 4, %%ecx);"
 			"incl %%ecx;"
 			"cmpl %%ecx %[n];"
 			"jge cpy;"
@@ -44,7 +44,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 			: [n] "r"(n), [dest] "r"(dest), [src] "r"(src)
 			: "eax", "ecx"
 	   );
-	return src;
+	return dest;
 }
 
 int asm_setjmp(asm_jmp_buf env) {
