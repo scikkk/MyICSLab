@@ -51,16 +51,15 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 
 int asm_setjmp(asm_jmp_buf env) {
 	asm(
-			"mov %%rsp  , %%rax;"
-			"mov %%ebx    , (%%rax);"
-			"mov %%esi    , 4(%%rax);"
-			"mov %%edi    , 8(%%rax);"
-			"mov %%ebp    , 12(%%rax);"
+			"mov %%ebx    , (%%rsp);"
+			"mov %%esi    , 4(%%rsp);"
+			"mov %%edi    , 8(%%rsp);"
+			"mov %%ebp    , 12(%%rsp);"
 
 			"lea 4(%%rsp) , %%rcx;"
-			"mov %%ecx    , 16(%%rax);"
+			"mov %%ecx    , 16(%%rsp);"
 			"mov (%%rsp)  , %%rcx;"
-			"mov %%ecx    , 20(%%rax);"
+			"mov %%ecx    , 20(%%rsp);"
 			: 
 			:
 			: "ecx", "rax"
@@ -96,3 +95,4 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 			: "eax", "ebx", "ecx", "edx", "esi"
 			);
 }
+
