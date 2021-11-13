@@ -51,16 +51,16 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 
 int asm_setjmp(asm_jmp_buf env) {
 	asm(
-			"mov 4(%%esp)  , %%eax;"
-			"mov %%ebx    , (%%eax);"
-			"mov %%esi    , 4(%%eax);"
-			"mov %%edi    , 8(%%eax);"
-			"mov %%ebp    , 12(%%eax);"
+			"mov 4(%%rsp)  , %%rax;"
+			"mov %%ebx    , (%%rax);"
+			"mov %%esi    , 4(%%rax);"
+			"mov %%edi    , 8(%%rax);"
+			"mov %%ebp    , 12(%%rax);"
 
 			"lea 4(%%esp) , %%ecx;"
-			"mov %%ecx    , 16(%%eax);"
+			"mov %%ecx    , 16(%%rax);"
 			"mov (%%esp)  , %%ecx;"
-			"mov %%ecx    , 20(%%eax);"
+			"mov %%ecx    , 20(%%rax);"
 			: 
 			:
 			: "ecx", "eax"
