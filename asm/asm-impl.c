@@ -94,16 +94,15 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 
 
 			"movl (%%edx)   , %%ebx;"
-			"movl 8(%%edx)  , %%esi;"
-			"movl 12(%%edx) , %%edi;"
-			"movl 16(%%edx) , %%ebp;"
-
-			"movl 20(%%edx) , %%ecx;"
+			"movl 4(%%edx)  , %%esi;"
+			"movl 8(%%edx) , %%edi;"
+			"movl 12(%%edx) , %%ebp;"
+			"movl 16(%%edx) , %%ecx;"
 			"movl %%ecx      , %%esp;"
 
 
-			"movl 24(%%edx) , %%ecx;"
-			"movl 4(%%edx)  , %%edx;"
+			"movl 20(%%edx) , %%ecx;"
+			/* "movl 4(%%edx)  , %%edx;" */
 			/* "movl %%ecx     , %%eip;" */
 			"jmp *(%%ecx);"
 
