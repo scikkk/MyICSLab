@@ -10,6 +10,7 @@ int main() {
 	if (r == 0) {
 		printf("Enter first branch.\n");
 		asm_longjmp(buf, 123);
+		printf("End first branch.\n");
 	} else {
 		printf("Enter second branch.\n");
 		assert(r == 123);
