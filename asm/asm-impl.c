@@ -53,7 +53,7 @@ int asm_setjmp(asm_jmp_buf env) {
 
 	asm volatile(
 			"push %%rbp;"
-			"mov %%rsp,%%rbp;"
+			"movq %%rsp,%%rbp;"
 			"mov (%%rbp),%%rax;"
 			"mov %%rax, (%%rdi);"
 			"lea 16(%%rsp), %%rax;"
