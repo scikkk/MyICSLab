@@ -99,6 +99,6 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 			"ret;"
 			:
 			:
-			: "eax", "ebx", "ecx", "edx", "esi"
+			: "eax", "ebx", "ecx", "edx"//, "esi"
 	   );
 }
