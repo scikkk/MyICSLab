@@ -52,17 +52,17 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 int asm_setjmp(asm_jmp_buf env) {
 	/* return setjmp(env); */
 	asm(
-			"mov 4(%%esp) , %%eax;"
-			"movl %%ebx , (%%eax);"
-			"movl %%edx, 4(%%eax);"
-			"movl %%esi ,8(%%eax);"
-			"movl %%edi, 12(%%eax);"
-			"movl %%ebp, 16(%%eax);"
+			"mov 4(%%esp)  , %%eax;"
+			"movl %%ebx    , (%%eax);"
+			"movl %%edx    , 4(%%eax);"
+			"movl %%esi    , 8(%%eax);"
+			"movl %%edi    , 12(%%eax);"
+			"movl %%ebp    , 16(%%eax);"
 
-			"leal 4(%%esp), %%ecx;"
-			"movl %%ecx, 20(%%eax);"
-			"movl (%%esp), %%ecx;"
-			"movl %%ecx, 24(%%eax);"
+			"leal 4(%%esp) , %%ecx;"
+			"movl %%ecx    , 20(%%eax);"
+			"movl (%%esp)  , %%ecx;"
+			"movl %%ecx    , 24(%%eax);"
 			/* "xor %%eax, %%eax;" */
 			/* "ret;" */
 			:
@@ -81,30 +81,31 @@ int asm_setjmp(asm_jmp_buf env) {
 /* 	void* esp; */
 /* 	void* eip; */
 /* } asm_jmp_buf; */
+
 void asm_longjmp(asm_jmp_buf env, int val) {
 	/* longjmp(env, val); */
 	asm(    
-			"movl 4(%%esp), %%edx;"
+			"movl 4(%%esp)  , %%edx;"
 			"movl 8(%%esp)  , %%eax;"
-			"test %%eax, %%eax;"
+			"test %%eax     , %%eax;"
 			"jnz .L1;"
 			"inc %%eax;"
 
 			".L1: ;"
 
 
-			"movl (%%edx)  , %%ebx;"
+			"movl (%%edx)   , %%ebx;"
 			"movl 8(%%edx)  , %%esi;"
-			"movl 12(%%edx)  , %%edi;"
-			"movl 16(%%edx)  , %%ebp;"
+			"movl 12(%%edx) , %%edi;"
+			"movl 16(%%edx) , %%ebp;"
 
-			"movl 20(%%edx)  , %%ecx;"
-			"mov %%ecx   , %%esp;"
+			"movl 20(%%edx) , %%ecx;"
+			"mov %%ecx      , %%esp;"
 
 
-			"movl 24(%%edx)   , %%ecx;"
-			"movl 4(%%edx), %%edx;"
-			"movl %%ecx, %%eip;"
+			"movl 24(%%edx) , %%ecx;"
+			"movl 4(%%edx)  , %%edx;"
+			"movl %%ecx     , %%eip;"
 
 			:
 			:
