@@ -70,7 +70,7 @@ int asm_setjmp(asm_jmp_buf env) {
 void asm_longjmp(asm_jmp_buf env, int val) {
 	/* longjmp(env, val); */
 
-	asm volatile(   "  cmp $0, %%eax;"
+	asm volatile(   "  cmpl $0x0, %%eax;"
 			"  jne .L1;"
 			"  inc %%eax;"
 			".L1:;"
