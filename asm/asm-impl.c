@@ -97,5 +97,8 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 
 			"movl $1 , %%eax;"
 			"ret;"
+			:
+			:
+			: "eax", "ebx", "ecx". "edx", "esi", "esp", "esi", "edi" 
 	   );
 }
