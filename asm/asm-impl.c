@@ -42,7 +42,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 			"jge .cpy;"
 			: 
 			: [n] "r"(n), [dest] "r"(dest), [src] "r"(src)
-			: "eax", "rcx"
+			: "al", "rcx"
 	   );
 	return dest;
 }
