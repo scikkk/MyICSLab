@@ -33,16 +33,16 @@ int asm_popcnt(uint64_t x) {
 void *asm_memcpy(void *dest, const void *src, size_t n) {
 	/* return memcpy(dest, src, n); */
 	asm(
-			"movl $0 , %%ecx;"
+			"movq $0 , %%rcx;"
 			"cpy:;"
-			"movl (%[src], %%ecx, 4) , %%eax;"
-			"movl %%eax, (%[dest], %%ecx, 4);"
+			"movl (%[src], %%rcx, 4) , %%eax;"
+			"movl %%eax, (%[dest], %%rcx, 4);"
 			"incl %%ecx;"
 			"cmpl %%ecx, %[n];"
 			"jge cpy;"
 			: 
 			: [n] "r"(n), [dest] "r"(dest), [src] "r"(src)
-			: "eax", "ecx"
+			: "eax", "rcx"
 	   );
 	return dest;
 }
