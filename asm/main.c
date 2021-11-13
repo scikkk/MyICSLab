@@ -8,6 +8,7 @@ int main() {
 
 	int r = asm_setjmp(buf);
 
+	printf("r:%d\n", r);
 	/* asm_longjmp(buf, 123); */
 
 
