@@ -8,7 +8,7 @@ int main() {
 	asm_setjmp(buf);
 	int r = asm_setjmp(buf);
 
-	asm_longjmp(buf, 123);
+	/* asm_longjmp(buf, 123); */
 
 
 
