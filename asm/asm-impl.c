@@ -47,58 +47,66 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 	return dest;
 }
 
+
+
 int asm_setjmp(asm_jmp_buf env) {
 	/* return setjmp(env); */
 	asm(
-			"movl %%ecx    , 12(%%esp);"
-			"movl 4(%%esp) , %%ecx;"
-			"movl $0       , (%%ecx);"
+			"mov 4(%%esp) , %%eax;"
+			"mov %%ebx , (%%eax);"
+			"mov %%edx, 4(%%eax);"
+			"mov %%esi ,8(%%eax);"
+			"mov %%edi, 12(%%eax);"
+			"mov %%ebp, 16(%%eax);"
 
-			"movl %%ebx    , 4(%%ecx);"
-			"movl 12(%%esp), %%eax;"
-			"movl %%eax    , 12(%%ecx);"
-
-			"movl %%edx    , 12(%%ecx);"
-			"movl %%esi    , 16(%%ecx);"
-			"movl %%edi    , 20(%%ecx);"
-			"movl %%ebp    , 24(%%ecx);"
-			"movl %%esp    , 28(%%ecx);"
-
-			"movl (%%esp)  , %%eax;"
-			"movl %%eax    , 32(%%ecx);"
-
-			"movl $0 , %%eax;"
+			"lea 4(%%esp), %%ecx;"
+			"mov %%ecx, 20(%%eax);"
+			"mov (%%esp), %%ecx;"
+			"mov %%ecx, 24(%%eax);"
+			"xor %%eax, %%eax;"
+			"ret;"
 			:
-			:
+			:			
 			: "ecx"
 	   );
-	return 0;
 }
 
+/* typedef struct { */
+/* 	void* ebx; */
+/* 	void* edx; */
+/* 	void* esi; */
+/* 	void* edi; */
+/* 	void* ebp; */
+/* 	void* esp; */
+/* 	void* eip; */
+/* } asm_jmp_buf; */
 void asm_longjmp(asm_jmp_buf env, int val) {
 	/* longjmp(env, val); */
-	asm(    "movl  4(%%esp) , %%ecx;"
-			"movl (%%ecx)  , %%eax;"
+	asm(    
+			"mov 4(%%esp), %%edx;"
+			"movl 8(%%esp)  , %%eax;"
+			"test %%eax, %%eax;"
+			"jnz .L1;"
+			"inc %%eax;"
+
+			".L1: ;"
 
 
-			"movl 4(%%ecx)  , %%ebx;"
-			"movl 12(%%ecx)  , %%edx;"
-			"movl 16(%%ecx)  , %%esi;"
-			"movl 20(%%ecx)  , %%edi;"
-			"movl 24(%%ecx)  , %%ebp;"
+			"movl (%%edx)  , %%ebx;"
+			"movl 8(%%edx)  , %%esi;"
+			"movl 12(%%edx)  , %%edi;"
+			"movl 16(%%edx)  , %%ebp;"
 
-			"movl 36(%%ecx)  , %%ecx;"
-			"movl 4(%%esp)   , %%eax;"
-			"movl %%ecx      , (%%eax);"
+			"movl 20(%%edx)  , %%ecx;"
+			"movl %%ecx   , %%esp;"
 
-			"movl 4(%%esp)   , %%ecx;"
-			"movl 32(%%ecx)  , %%eax;"
-			"movl 28(%%ecx)  , %%esp;"
 
-			"movl $1 , %%eax;"
-			"ret;"
+			"movl 24(%%edx)   , %%ecx;"
+			"movl 4(%%edx), %%edx;"
+			"jmp (%%ecx);"
+
 			:
 			:
 			: "eax", "ebx", "ecx", "edx", "esi"
-	   );
+			);
 }

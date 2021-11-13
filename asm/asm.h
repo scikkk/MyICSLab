@@ -4,15 +4,14 @@
 /* #define asm_jmp_buf jmp_buf */
 
 typedef struct {
-	void* rsv; // 0(eax)
-	void* ebx; // 4
-	void* ecx; // 8
-	void* edx; // 12
-	void* esi; // 16
-	void* edi; // 20
-	void* ebp; // 24
-	void* esp; // 28
-	void* eip; // 32
+	void* ebx;
+	void* ecx;
+	void* edx;
+	void* esi;
+	void* edi;
+	void* ebp;
+	void* esp;
+	void* eip;
 } asm_jmp_buf;
 
 int64_t asm_add(int64_t a, int64_t b);
