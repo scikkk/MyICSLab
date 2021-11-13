@@ -62,7 +62,7 @@ int asm_setjmp(asm_jmp_buf env) {
 
 			"mov (%%esp)  , %%rcx;"
 			"mov %%rcx    , 40(%%eax);"
-			: [ebx] "r"(env[0]) 
+			: [ebx] "="(env[0]) 
 			:
 			: "rcx", "rax"
 	   );
