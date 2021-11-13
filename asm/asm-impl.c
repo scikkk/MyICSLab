@@ -92,7 +92,7 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 
 			:
 			:
-			: "rax", "rbx", "rcx", "rdx", "rsi"
+			: "rax", "rbx", "rcx", "rdx", "rsi", "rsp"
 			);
 }
 
