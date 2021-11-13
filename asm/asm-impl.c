@@ -51,7 +51,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 
 int asm_setjmp(asm_jmp_buf env) {
 	int ans = 0;
-	asm volatile( "  mov %%rbx, (%%rax);"
+	asm volatile( "  movq %%rbx, (%%rax);"
 			"  mov %%rsi, 8(%%rax);"
 			"  mov %%rdi, 16(%%rax);"
 			"  mov %%rbp, 24(%%rax);"
