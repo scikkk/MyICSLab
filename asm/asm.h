@@ -4,6 +4,7 @@
 
 #include <setjmp.h>
 #define asm_jmp_buf jmp_buf
+typedef long long int asm_jmp_buf[8] 
 
 /* typedef struct { */
 /* 	unsigned long eax; */
