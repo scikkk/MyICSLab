@@ -50,59 +50,48 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 
 
 int asm_setjmp(asm_jmp_buf env) {
-	asm(
-			/* "mov %%esp , %%eax;" */
-			/* "mov %%rbx    , (%%eax);" */
-			/* "mov %%rsi    , 8(%%eax);" */
-			/* "mov %%rdi    , 16(%%eax);" */
-			/* "mov %%rbp    , 24(%%eax);" */
 
-			/* "lea 4(%%esp) , %%rcx;" */
-			/* "mov %%rcx    , 32(%%eax);" */
-
-			/* "mov (%%esp)  , %%rcx;" */
-			/* "mov %%rcx    , 40(%%eax);" */
-			"mov %%rbx , %[ebx];"
-			"mov %%rsi , %[esi];"
-			"mov %%rdi , %[edi];"
-			"mov %%rbp , %[ebp];"
-
-			"lea 4(%%esp) , %%rcx;"
-			"mov %%rcx , %[esp];"
-
-			"mov (%%esp) , %[eip];"
-
-			: [ebx] "=r"(env[0]), [esi] "=r"(env[1]), [edi] "=r"(env[2]), [ebp] "=r"(env[3]), [esp] "=r"(env[4]) , [eip] "=r"(env[5])
+	asm volatile(
+			"movq %%rax,0(%%rdi);"
+			"movq %%rbx,8(%%rdi);"
+			"movq %%rcx,16(%%rdi);"
+			"movq %%rdx,24(%%rdi);"
+			"movq %%rdi,32(%%rdi);"
+			"movq %%rsi,40(%%rdi);"
+			"movq %%rbp,%%rbx;"
+			"add $16,%%rbx;"
+			"movq %%rbx,48(%%rdi);"  //esp
+			"movq 0(%%rbp),%%rbx;"
+			"movq %%rbx,56(%%rdi);"	//ebp
+			"movq 8(%%rbp),%%rbx;"
+			"movq %%rbx,64(%%rdi);"  //eip
 			:
-			: "rcx"
-	   );
+			:
+			: "rbx"
+		);
+
 	return 0;
 }
 
 void asm_longjmp(asm_jmp_buf env, int val) {
 	/* longjmp(env, val); */
-	asm(    
-			"mov 4(%%esp)  , %%rdx;"
-			"mov 8(%%esp)  , %%rax;"
-			"test %%rax , %%rax;"
-			"jnz .L1;"
-			"inc %%rax;"
 
-			".L1: ;"
-			"mov (%%rdx)   , %%rbx;"
-			"mov 8(%%rdx)  , %%rsi;"
-			"mov 16(%%rdx)  , %%rdi;"
-			"mov 24(%%rdx) , %%rbp;"
-	
-			"mov 32(%%rdx) , %%rcx;"
-			/* "mov %%rcx     , %%rsp;" */
 
-			"mov 40(%%rdx) , %%rcx;"
-			"jmp *(%%rcx);"
-
+	asm volatile(
+			"movq 0(%%rdi),%%rax;"
+			"movq 16(%%rdi),%%rcx;"
+			"movq 24(%%rdi),%%rdx;"
+			"movq 48(%%rdi),%%rsp;"
+			"movq 56(%%rdi),%%rbp;"
+			"movq 64(%%rdi),%%rbx;"
+			"pushq %%rbx;"			//eip
+			"movq 8(%%rdi),%%rbx;"
+			"movq 32(%%rdi),%%rdi;"
+			"movq 40(%%rdi),%%rsi;"
+			"ret;"					//eip
 			:
-			: [ebx] "r"(env[0]), [esi] "r"(env[1]), [edi] "r"(env[2]), [ebp] "r"(env[3]), [esp] "r"(env[4]) , [eip] "r"(env[5])
-			: "rax", "rbx", "rcx", "rdx",  "rdi", "rsi"
-			);
+			:
+			: "rax", "rbx", "rcx", "rdx", "rdi", "rsi"
+		);
 }
 
