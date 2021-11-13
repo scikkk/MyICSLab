@@ -38,8 +38,8 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 			"movb (%[src], %%rcx, 1) , %%al;"
 			"movb %%al, (%[dest], %%rcx, 1);"
 			"addq $1, %%rcx;"
-			"cmpq $0, %[n];"
-			"jle .cpy;"
+			"cmpq %%rcx, %[n];"
+			"jg .cpy;"
 			: 
 			: [n] "r"(n), [dest] "r"(dest), [src] "r"(src)
 			: "al", "rcx"
