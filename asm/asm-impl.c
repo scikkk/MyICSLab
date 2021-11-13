@@ -50,7 +50,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 int asm_setjmp(asm_jmp_buf env) {
 	/* return setjmp(env); */
 	asm(
-			"movl %ecx    , 12(%esp);"
+			"movl %%ecx    , 12(%esp);"
 			"movl 4(%esp) , %ecx;"
 			"movl $0       , (%ecx);"
 
