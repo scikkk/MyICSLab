@@ -63,12 +63,13 @@ int asm_setjmp(asm_jmp_buf env) {
 			"mov %%ecx, 20(%%eax);"
 			"mov (%%esp), %%ecx;"
 			"mov %%ecx, 24(%%eax);"
-			"xor %%eax, %%eax;"
-			"ret;"
+			/* "xor %%eax, %%eax;" */
+			/* "ret;" */
 			:
 			:			
 			: "ecx"
 	   );
+	return 0;
 }
 
 /* typedef struct { */
