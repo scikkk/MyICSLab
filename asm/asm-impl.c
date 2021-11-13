@@ -70,8 +70,7 @@ int asm_setjmp(asm_jmp_buf env) {
 			"lea 4(%%esp) , %%rcx;"
 			"mov %%rcx , %[esp];"
 
-			"mov (%%esp) , %%rcx;"
-			"mov %%rcx , %[eip];"
+			"mov (%%esp) , %[eip];"
 
 			: [ebx] "=r"(env[0]), [esi] "=r"(env[1]), [edi] "=r"(env[2]), [ebp] "=r"(env[3]), [esp] "=r"(env[4]) , [eip] "=r"(env[5])
 			:
