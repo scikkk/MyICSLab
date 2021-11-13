@@ -50,36 +50,23 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 
 
 int asm_setjmp(asm_jmp_buf env) {
-	/* return setjmp(env); */
 	asm(
-			"mov 4(%%rsp)  , %%rax;"
+			"mov 4(%%esp)  , %%eax;"
 			"mov %%ebx    , (%%eax);"
 			"mov %%esi    , 4(%%eax);"
 			"mov %%edi    , 8(%%eax);"
 			"mov %%ebp    , 12(%%eax);"
 
-			"leal 4(%%esp) , %%ecx;"
+			"lea 4(%%esp) , %%ecx;"
 			"mov %%ecx    , 16(%%eax);"
 			"mov (%%esp)  , %%ecx;"
 			"mov %%ecx    , 20(%%eax);"
-			/* "xor %%eax, %%eax;" */
-			/* "ret;" */
 			: 
-			://	"eax"(&env)		
+			:
 			: "ecx", "eax"
 	   );
 	return 0;
 }
-
-/* typedef struct { */
-/* 	void* ebx; */
-/* 	void* edx; */
-/* 	void* esi; */
-/* 	void* edi; */
-/* 	void* ebp; */
-/* 	void* esp; */
-/* 	void* eip; */
-/* } asm_jmp_buf; */
 
 void asm_longjmp(asm_jmp_buf env, int val) {
 	/* longjmp(env, val); */
@@ -102,8 +89,6 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 
 
 			"movl 20(%%edx) , %%ecx;"
-			/* "movl 4(%%edx)  , %%edx;" */
-			/* "movl %%ecx     , %%eip;" */
 			"jmp *(%%ecx);"
 
 			:

@@ -1,11 +1,9 @@
 #include <stdint.h>
 #include <stddef.h>
 
-/* #define asm_jmp_buf jmp_buf */
 
 typedef struct {
 	void* ebx;
-	/* void* edx; */
 	void* esi;
 	void* edi;
 	void* ebp;
