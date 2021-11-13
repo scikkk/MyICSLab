@@ -2,14 +2,7 @@
 #include <stddef.h>
 
 
-typedef struct {
-	uint32_t ebx;
-	uint32_t esi;
-	uint32_t edi;
-	uint32_t ebp;
-	uint32_t esp;
-	uint32_t eip;
-} asm_jmp_buf;
+typedef uint32_t asm_jmp_buf[6];
 
 int64_t asm_add(int64_t a, int64_t b);
 int     asm_popcnt(uint64_t x);
