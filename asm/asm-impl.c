@@ -51,20 +51,31 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 
 int asm_setjmp(asm_jmp_buf env) {
 	asm(
-			"mov %%esp , %%eax;"
-			"mov %%rbx    , (%%eax);"
-			"mov %%rsi    , 8(%%eax);"
-			"mov %%rdi    , 16(%%eax);"
-			"mov %%rbp    , 24(%%eax);"
+			/* "mov %%esp , %%eax;" */
+			/* "mov %%rbx    , (%%eax);" */
+			/* "mov %%rsi    , 8(%%eax);" */
+			/* "mov %%rdi    , 16(%%eax);" */
+			/* "mov %%rbp    , 24(%%eax);" */
+
+			/* "lea 4(%%esp) , %%rcx;" */
+			/* "mov %%rcx    , 32(%%eax);" */
+
+			/* "mov (%%esp)  , %%rcx;" */
+			/* "mov %%rcx    , 40(%%eax);" */
+			"mov %%rbx , %[ebx];"
+			"mov %%rsi , %[esi];"
+			"mov %%rdi , %[edi];"
+			"mov %%rbp , %[ebp];"
 
 			"lea 4(%%esp) , %%rcx;"
-			"mov %%rcx    , 32(%%eax);"
+			"mov %%rcx , %[esp];"
 
-			"mov (%%esp)  , %%rcx;"
-			"mov %%rcx    , 40(%%eax);"
-			: [ebx] "=r"(env[0]) 
+			"mov (%%esp) , %%rcx;"
+			"mov %%rcx , %[eip];"
+
+			: [ebx] "=r"(env[0]), [esi] "=r"(env[1]), [edi] "=r"(env[2]), [ebp] "=r"(env[3]), [esp] "=r"(env[4]) , [eip] "=r"(env[5])
 			:
-			: "rcx", "rax"
+			: "rcx"
 	   );
 	return 0;
 }
