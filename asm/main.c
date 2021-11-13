@@ -4,10 +4,8 @@
 
 int main() {
 	/* printf("\n\nBEGIN.\n"); */
-	asm_jmp_buf buf = {1,2,3,4,5,6};
-
+	asm_jmp_buf buf;
 	int r = asm_setjmp(buf);
-
 	printf("r:%d\n", r);
 	/* asm_longjmp(buf, 123); */
 
