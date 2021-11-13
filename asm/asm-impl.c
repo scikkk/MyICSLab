@@ -63,7 +63,7 @@ int asm_setjmp(asm_jmp_buf env) {
 			"mov %%ecx    , 20(%%eax);"
 			: 
 			:
-			: "ecx", "eax"
+			: "ecx", "rax"
 	   );
 	return 0;
 }
