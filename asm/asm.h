@@ -3,12 +3,12 @@
 
 
 typedef struct {
-	void* ebx;
-	void* esi;
-	void* edi;
-	void* ebp;
-	void* esp;
-	void* eip;
+	uint32_t ebx;
+	uint32_t* esi;
+	uint32_t* edi;
+	uint32_t* ebp;
+	uint32_t* esp;
+	uint32_t* eip;
 } asm_jmp_buf;
 
 int64_t asm_add(int64_t a, int64_t b);
