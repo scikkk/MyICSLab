@@ -14,7 +14,7 @@ int main() {
   /* } */
   char a[] = "wangke2002";
   char b[] = "00000000000000";
-  /* asm_memcpy(b, a, 6); */
+  asm_memcpy(b, a, 6);
   printf("a:%s\nb:%s\n", a, b);
   printf("END.\n");
 }
