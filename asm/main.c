@@ -4,7 +4,7 @@
 
 int main() {
 	/* printf("\n\nBEGIN.\n"); */
-	asm_jmp_buf buf={0,1,2,3,4,5};
+	asm_jmp_buf buf;
 	asm_setjmp(buf);
 	/* int r = asm_setjmp(buf); */
 	/* if (r == 0) { */
