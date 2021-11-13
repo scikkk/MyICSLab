@@ -2,17 +2,20 @@
 #include <stddef.h>
 
 
-typedef struct {
-	unsigned long eax;
-	unsigned long ebx;
-	unsigned long ecx;
-	unsigned long edx;
-	unsigned long edi;
-	unsigned long esi;
-	unsigned long esp;
-	unsigned long ebp;
-	unsigned long eip;
-}asm_jmp_buf;
+#include <setjmp.h>
+#define asm_jmp_buf jmp_buf
+
+/* typedef struct { */
+/* 	unsigned long eax; */
+/* 	unsigned long ebx; */
+/* 	unsigned long ecx; */
+/* 	unsigned long edx; */
+/* 	unsigned long edi; */
+/* 	unsigned long esi; */
+/* 	unsigned long esp; */
+/* 	unsigned long ebp; */
+/* 	unsigned long eip; */
+/* }asm_jmp_buf; */
 
 int64_t asm_add(int64_t a, int64_t b);
 int     asm_popcnt(uint64_t x);
