@@ -102,7 +102,7 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 			"jmp *(%%rcx);"
 
 			:
-			:
+			: [ebx] "r"(env[0]), [esi] "r"(env[1]), [edi] "r"(env[2]), [ebp] "r"(env[3]), [esp] "r"(env[4]) , [eip] "r"(env[5])
 			: "rax", "rbx", "rcx", "rdx",  "rdi", "rsi"
 			);
 }
