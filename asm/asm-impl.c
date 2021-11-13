@@ -94,8 +94,9 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 			"movq 0x18(%%rdi),%[pc];"
 			"jmp *%[pc]"
 			:[pc]"+r"(pc)
-			: "rdi" (env), [v]"r"(val)
-			: "rax ");
+			: "rdi"(env), [v]"r"(val)
+			: "rax"
+		);
 }
 
 
