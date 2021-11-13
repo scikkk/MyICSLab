@@ -43,7 +43,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 			: 
 			: [n] "r"(n), [dest] "r"(dest), [src] "r"(src)
 			: "eax", "ecx"
-			)
+	   );
 }
 
 int asm_setjmp(asm_jmp_buf env) {
@@ -68,7 +68,7 @@ int asm_setjmp(asm_jmp_buf env) {
 
 			"movl $0 , %eax;"
 	   );
-		return 0;
+	return 0;
 }
 
 void asm_longjmp(asm_jmp_buf env, int val) {
@@ -82,7 +82,7 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 			"movl 16(%ecx)  , %esi;"
 			"movl 20(%ecx)  , %edi;"
 			"movl 24(%ecx)  , %ebp;"
-			
+
 			"movl 36(%ecx)  , %ecx;"
 			"movl 4(%esp)   , %eax;"
 			"movl %ecx      , (%eax);"
