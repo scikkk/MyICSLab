@@ -38,7 +38,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 			"movl (%[src], %%ecx, 4) , %%eax;"
 			"movl %%eax, (%[dest], %%ecx, 4);"
 			"incl %%ecx;"
-			"cmpl %%ecx %[n];"
+			"cmpl %%ecx, %[n];"
 			"jge cpy;"
 			: 
 			: [n] "r"(n), [dest] "r"(dest), [src] "r"(src)
