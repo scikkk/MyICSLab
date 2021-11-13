@@ -34,12 +34,12 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 	/* return memcpy(dest, src, n); */
 	asm(
 			"movq $0 , %%rcx;"
-			"cpy:;"
+			".cpy:;"
 			"movl (%[src], %%rcx, 4) , %%eax;"
 			"movl %%eax, (%[dest], %%rcx, 4);"
-			"incq %%rcx;"
+			"addq $1, %%rcx;"
 			"cmpq %%rcx, %[n];"
-			"jg cpy;"
+			"jg .cpy;"
 			: 
 			: [n] "r"(n), [dest] "r"(dest), [src] "r"(src)
 			: "eax", "rcx"
