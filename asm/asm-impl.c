@@ -66,7 +66,7 @@ int asm_setjmp(asm_jmp_buf env) {
 			/* "xor %%eax, %%eax;" */
 			/* "ret;" */
 			: 
-			:	"eax"(env)		
+			:	"eax"(&env)		
 			: "ecx", "eax"
 	   );
 	return 0;
