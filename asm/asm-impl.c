@@ -65,8 +65,8 @@ int asm_setjmp(asm_jmp_buf env) {
 			"movl %%ecx    , 24(%%eax);"
 			/* "xor %%eax, %%eax;" */
 			/* "ret;" */
-			: "eax"(env)
-			:			
+			: 
+			:	"eax"(env)		
 			: "ecx", "eax"
 	   );
 	return 0;
