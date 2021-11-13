@@ -8,12 +8,12 @@ int main() {
 	asm_setjmp(buf);
 	int r = asm_setjmp(buf);
 	if (r == 0) {
-		/* printf("Enter first branch.\n"); */
+		printf("Enter first branch.\n");
 		asm_longjmp(buf, 123);
 	} else {
-		/* printf("Enter second branch.\n"); */
+		printf("Enter second branch.\n");
 		assert(r == 123);
-		/* printf("PASSED.\n"); */
+		printf("PASSED.\n");
 	}
 	printf("END.\n");
 }
