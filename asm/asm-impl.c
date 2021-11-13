@@ -74,21 +74,21 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 	asm(    
 			"mov %%rdi  , %%rdx;"
 			"mov %%rsi  , %%eax;"
-			"test %%eax    , %%eax;"
+			"test %%eax , %%eax;"
 			"jnz .L1;"
 			"inc %%eax;"
 
 			".L1: ;"
-			"mov (%%rdx)   , %%ebx;"
-			"mov 4(%%rdx)  , %%esi;"
-			"mov 8(%%rdx)  , %%edi;"
-			"mov 12(%%rdx) , %%ebp;"
+			"mov (%%rdx)   , %%rbx;"
+			"mov 8(%%rdx)  , %%rsi;"
+			"mov 16(%%rdx)  , %%rdi;"
+			"mov 24(%%rdx) , %%rbp;"
 	
-			"mov 16(%%rdx) , %%ecx;"
-			"mov %%ecx     , %%esp;"
+			"mov 32(%%rdx) , %%rcx;"
+			"mov %%rcx     , %%rsp;"
 
-			"mov 20(%%edx) , %%ecx;"
-			"jmp *(%%ecx);"
+			"mov 40(%%rdx) , %%rcx;"
+			"jmp *(%%rcx);"
 
 			:
 			:
