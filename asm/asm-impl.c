@@ -53,23 +53,24 @@ int asm_setjmp(asm_jmp_buf env) {
 
 	asm volatile(
 			"push %%rbp;"
-			"movq %%rax,0(%%rdi);"
-			"movq %%rbx,8(%%rdi);"
-			"movq %%rcx,16(%%rdi);"
-			"movq %%rdx,24(%%rdi);"
-			"movq %%rdi,32(%%rdi);"
-			"movq %%rsi,40(%%rdi);"
-			"movq %%rbp,%%rbx;"
-			"add $16,%%rbx;"
-			"movq %%rbx,48(%%rdi);"  //esp
-			"movq 0(%%rbp),%%rbx;"
-			"movq %%rbx,56(%%rdi);"	//ebp
-			"movq 8(%%rbp),%%rbx;"
-			"movq %%rbx,64(%%rdi);"  //eip
+			"mov %%rsp,%%rbp;"
+			"mov (%%rbp),%%rax;"
+			"mov %%rax, (%%rdi);"
+			"lea 16(%%rsp), %%rax;"
+			"mov %%rax,8(%%rdi);" //rsp
+			"mov %%rbx,16(%%rdi);"
+			"mov 8(%%rsp),%%rax;"
+			"mov %%rax,24(%%rdi);" //pc
+			"mov %%r12,32(%%rdi);"
+			"mov %%r13,40(%%rdi);"
+			"mov %%r14,48(%%rdi);"
+			"mov %%r15,56(%%rdi);"//save register
+			"mov %%rbp,%%rsp;"
+			"pop %%rbp;"
 			:
-			:
-			: "rbx"
-		);
+			: "rdi"(env)
+			: "memory", "rdi"
+			);
 
 	return 0;
 }
@@ -93,6 +94,6 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 			:
 			:
 			: "rax", "rbx", "rcx", "rdx", "rdi", "rsi"
-		);
+			);
 }
 
