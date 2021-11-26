@@ -34,7 +34,7 @@ int *sieve(int n) {
 		if(is_prime[i]) primes[++primesize] = i;
 	int *p = primes;
 	*p = 2;
-		for(int j=0; j < primesize && i*(*p++) <= n; ++j)
+		for(int j=0; j < primesize && i*(*p++) < n; ++j)
 		{
 			is_prime[i*(*p)] = false;
 			if(i%(*p) == 0) break;
