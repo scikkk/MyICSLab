@@ -25,17 +25,19 @@ int *sieve(int n) {
 	/* *p = 0; */
 	/* return primes; */
 	int primesize = 0;
-	memset(is_prime,1,sizeof(is_prime));
+	memset(is_prime, 4, N);
 
 	/* for (int i = 0; i <= n; i++) */
 	/* 	is_prime[i] = true; */
-	is_prime[1]=false;
-	for(int i=2;i<=n;i++)
+	is_prime[1] = false;
+	for(int i=2; i<=n; i++)
 	{
-		if(is_prime[i])primes[primesize++]=i;
-		for(int j=0;j<primesize&&i*primes[j]<=n;j++)
+		
+		if(is_prime[i]) primes[primesize++] = i;
+		for(int j=0; j < primesize && i*primes[j] <= n; ++j)
 		{
-			is_prime[i*primes[j]]=false;
+			
+			is_prime[i*primes[j]] = false;
 			if(i%primes[j]==0)break;
 		}
 	}
