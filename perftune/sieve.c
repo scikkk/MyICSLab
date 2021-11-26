@@ -25,10 +25,10 @@ int *sieve(int n) {
 	/* *p = 0; */
 	/* return primes; */
 	int primesize = 0;
-	/* memset(is_prime,1,sizeof(is_prime)); */
+	memset(is_prime,1,sizeof(is_prime));
 
-	for (int i = 0; i <= n; i++)
-		is_prime[i] = true;
+	/* for (int i = 0; i <= n; i++) */
+	/* 	is_prime[i] = true; */
 	is_prime[1]=false;
 	for(int i=2;i<=n;i++)
 	{
