@@ -38,5 +38,6 @@ int *sieve(int n) {
             if(i%primes[j]==0)break;
         }
     }
+	++primes;
     return primes;
 }
