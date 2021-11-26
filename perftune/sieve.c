@@ -31,13 +31,13 @@ int *sieve(int n) {
 	is_prime[1] = false;
 	for(int i=1; i<=n; i++, i++)
 	{
-		if(is_prime[i]) primes[primesize++] = i;
+		if(is_prime[i]) primes[++primesize] = i;
 	int *p = primes;
-		for(int j=0; j < primesize && i*(*p) <= n; ++j)
+		for(int j=0; j < primesize && i*(*p++) <= n; ++j)
 		{
 			is_prime[i*(*p)] = false;
 			if(i%(*p) == 0) break;
-			p++;
+			
 		}
 	}
 	return primes;
