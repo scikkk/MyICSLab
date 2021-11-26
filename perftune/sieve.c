@@ -6,9 +6,9 @@
 #define N 10000000
 
 static bool is_prime[N];
-static int  primes[N];
+static short  primes[N];
 
-int *sieve(int n) {
+short *sieve(int n) {
   assert(n + 1 < N);
   /* for (int i = 0; i <= n; i++) */
   /*   is_prime[i] = true; */
