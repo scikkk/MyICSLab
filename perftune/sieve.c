@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <stdio.h>
 
-#define N 1000000
+#define N 5000000
 
 static bool is_prime[N];
 static int  primes[N];
