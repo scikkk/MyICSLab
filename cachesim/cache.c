@@ -87,7 +87,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 			uint32_t *p = &cache[k+begin_line].data[(addr>>2)&0xf];
 			*p = (*p & ~wmask) | (data & wmask);
 			cache[k+begin_line].dity = 1;
-					printf("%d:load write kuai_num =%d\n", __LINE__, kuai_qun);
+					printf("%d:load write kuai_num =%lu\n", __LINE__, kuai_qun);
 			return;
 		}
 	}
