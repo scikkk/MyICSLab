@@ -4,14 +4,16 @@
 void mem_read(uintptr_t block_num, uint8_t *buf);
 void mem_write(uintptr_t block_num, const uint8_t *buf);
 
-typedef uint32_t Block[16];
+
 typedef struct{
-	Block data;
+	uint32_t data[16];
+	uint64_t addr;
 	bool valid;
 } cache_line;
 
 cache_line *cache;
 static int lu = 0;
+static int zu = 0;
 
 
 static uint64_t cycle_cnt = 0;
@@ -21,15 +23,38 @@ void cycle_increase(int n) { cycle_cnt += n; }
 // TODO: implement the following functions
 
 uint32_t cache_read(uintptr_t addr) {
-  return 0;
+	int kuai_qun = (int)addr/16;
+	int zu_no = kuai_qun%zu;
+	int begin_line = zu_no*lu;
+	uintptr_t begin_addr = addr - addr%16;
+	// search data in cache
+	for(int k = 0; k < lu; k++){
+		if((cache[k+begin_line].addr == begin_addr) && cache[k+begin_line].valid){
+			return cache[k+begin_line].data[addr & 0xf];
+		}
+	}
+	// find out if there is a blank line
+
+	for(int k = 0; k <= lu; k++){
+		if(!cache[k+begin_line].valid || k == lu){
+			k %= lu;
+			mem_read(addr-addr%16, (uint8_t*)&cache[k+begin_line].data[0]);
+			cache[k+begin_line].valid = 1;
+			cache[k+begin_line].addr = begin_addr;
+			return cache[k+begin_line].data[addr & 0xf];
+		}
+	}
+	return 0;
 }
 
 void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
+
 }
 
 void init_cache(int total_size_width, int associativity_width) {
-	cache = malloc(exp2(total_size_width)+exp2(total_size_width)/64);
 	lu = exp2(associativity_width);
+	zu = exp2(total_size_width-associativity_width) / 64;
+	cache = malloc(lu*zu*73);
 }
 
 void display_statistic(void) {
