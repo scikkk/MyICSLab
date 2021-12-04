@@ -40,7 +40,9 @@ uint32_t cache_read(uintptr_t addr) {
 			if (k == lu) {
 				k = rand()%lu;
 				if(cache[k+begin_line].dity){
-					mem_write(cache[k+begin_line].addr, (uint8_t*)&cache[k+begin_line].data[0]);
+					mem_write(cache[k+begin_line].addr>>BLOCK_WIDTH, (uint8_t*)&cache[k+begin_line].data[0]);
+
+			printf("%d:write back kuai_num =%lu\n", __LINE__, cache[k+begin_line].addr>>BLOCK_WIDTH);
 				}	
 			}
 			mem_read(kuai_qun, (uint8_t*)&cache[k+begin_line].data[0]);
@@ -76,7 +78,9 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 			if (k == lu) {
 				k = rand()%lu;
 				if(cache[k+begin_line].dity){
-					mem_write(cache[k+begin_line].addr, (uint8_t*)&cache[k+begin_line].data[0]);
+					mem_write(cache[k+begin_line].addr>>BLOCK_WIDTH, (uint8_t*)&cache[k+begin_line].data[0]);
+
+			printf("%d:write back kuai_num =%lu\n", __LINE__, cache[k+begin_line].addr>>BLOCK_WIDTH);
 				}	
 			}
 			mem_read(kuai_qun, (uint8_t*)&cache[k+begin_line].data[0]);
