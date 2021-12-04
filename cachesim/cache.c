@@ -60,7 +60,8 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 	// search data in cache
 	for(int k = 0; k < lu; k++){
 		if((cache[k+begin_line].addr >> BLOCK_WIDTH == kuai_qun) && cache[k+begin_line].valid){
-			cache[k+begin_line].data[(addr>>2)&0xf] = data&wmask;
+			uint32_t *p = &cache[k+begin_line].data[(addr>>2)&0xf];
+			*p = (*p & ~wmask) | (data & wmask);
 			cache[k+begin_line].dity = 1;
 			return;
 		}
@@ -77,7 +78,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 			mem_read(kuai_qun, (uint8_t*)&cache[k+begin_line].data[0]);
 			cache[k+begin_line].valid = 1;
 			cache[k+begin_line].addr = kuai_qun;
-			uint32_t* p = &cache[k+begin_line].data[(addr>>2)&0xf];
+			uint32_t *p = &cache[k+begin_line].data[(addr>>2)&0xf];
 			*p = (*p & ~wmask) | (data & wmask);
 			cache[k+begin_line].dity = 1;
 			return;
