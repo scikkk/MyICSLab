@@ -24,10 +24,10 @@ void cycle_increase(int n) { cycle_cnt += n; }
 // TODO: implement the following functions
 
 uint32_t cache_read(uintptr_t addr) {
-	int kuai_qun = (int)addr/16;
+	int kuai_qun = addr >> BLOCK_WIDTH;
 	int zu_no = kuai_qun%zu;
 	int begin_line = zu_no*lu;
-	uintptr_t begin_addr = addr - addr%16;
+	uintptr_t begin_addr = addr - addr%BLOCK_SIZE;
 	// search data in cache
 	for(int k = 0; k < lu; k++){
 		if((cache[k+begin_line].addr == begin_addr) && cache[k+begin_line].valid){
@@ -55,10 +55,10 @@ uint32_t cache_read(uintptr_t addr) {
 
 void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 
-	int kuai_qun = (int)addr/16;
+	int kuai_qun = addr >> BLOCK_WIDTH;
 	int zu_no = kuai_qun%zu;
 	int begin_line = zu_no*lu;
-	uintptr_t begin_addr = addr - addr%16;
+	uintptr_t begin_addr = addr - addr%BLOCK_SIZE;
 	// search data in cache
 	for(int k = 0; k < lu; k++){
 		if((cache[k+begin_line].addr == begin_addr) && cache[k+begin_line].valid){
@@ -76,10 +76,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 					mem_write(kuai_qun, (uint8_t*)&cache[k+begin_line].data[0]);
 				}	
 			}
-			uint8_t d[64];
-			/* mem_read(kuai_qun, (uint8_t*)&cache[k+begin_line].data[0]); */
-			mem_read(kuai_qun, d);
-
+			mem_read(kuai_qun, (uint8_t*)&cache[k+begin_line].data[0]);
 			cache[k+begin_line].valid = 1;
 			cache[k+begin_line].addr = begin_addr;
 			cache[k+begin_line].data[addr & 0xf] = data&wmask;
