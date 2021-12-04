@@ -46,7 +46,7 @@ uint32_t cache_read(uintptr_t addr) {
 			cache[k+begin_line].valid = 1;
 			cache[k+begin_line].dity = 0;
 			cache[k+begin_line].addr = addr;
-			return cache[k+begin_line].data[2];
+			return cache[k+begin_line].data[3];
 		}
 	}
 	return 0;
