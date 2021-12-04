@@ -30,7 +30,7 @@ uint32_t cache_read(uintptr_t addr) {
 	// search data in cache
 	for(int k = 0; k < lu; k++){
 		if((cache[k+begin_line].addr >> BLOCK_WIDTH == kuai_qun) && cache[k+begin_line].valid){
-			printf("LINE==%d\n", __LINE__);
+			printf("%d:hit kuai_num =%d\n", __LINE__, kuai_qun);
 			return cache[k+begin_line].data[(addr>>2)&0xf];
 		} 
 	}
@@ -40,14 +40,14 @@ uint32_t cache_read(uintptr_t addr) {
 			if (k == lu) {
 				k = rand()%lu;
 				if(cache[k+begin_line].dity){
-					mem_write(kuai_qun, (uint8_t*)&cache[k+begin_line].data[0]);
+					mem_write(cache[k+begin_line].addr, (uint8_t*)&cache[k+begin_line].data[0]);
 				}	
 			}
 			mem_read(kuai_qun, (uint8_t*)&cache[k+begin_line].data[0]);
 			cache[k+begin_line].valid = 1;
 			cache[k+begin_line].dity = 0;
 			cache[k+begin_line].addr = addr;
-			printf("LINE==%d\n", __LINE__);
+			printf("%d:load kuai_num =%d\n", __LINE__, kuai_qun);
 			return cache[k+begin_line].data[(addr>>2)&0xf];
 		}
 	}
@@ -76,7 +76,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 			if (k == lu) {
 				k = rand()%lu;
 				if(cache[k+begin_line].dity){
-					mem_write(kuai_qun, (uint8_t*)&cache[k+begin_line].data[0]);
+					mem_write(cache[k+begin_line].addr, (uint8_t*)&cache[k+begin_line].data[0]);
 				}	
 			}
 			mem_read(kuai_qun, (uint8_t*)&cache[k+begin_line].data[0]);
