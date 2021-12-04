@@ -79,7 +79,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 void init_cache(int total_size_width, int associativity_width) {
 	lu = exp2(associativity_width);
 	zu = exp2(total_size_width-associativity_width) / 64;
-	cache = malloc(lu*zu*73);
+	cache = malloc(lu*zu*74);
 }
 
 void display_statistic(void) {
