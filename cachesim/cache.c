@@ -30,7 +30,7 @@ uint32_t cache_read(uintptr_t addr) {
 	// search data in cache
 	for(int k = 0; k < lu; k++){
 		if((cache[k+begin_line].addr >> BLOCK_WIDTH == kuai_qun) && cache[k+begin_line].valid){
-			printf("%d:hit kuai_num =%d\n", __LINE__, kuai_qun);
+			printf("%d:hit read quai_num =%d\n", __LINE__, kuai_qun);
 			return cache[k+begin_line].data[(addr>>2)&0xf];
 		} 
 	}
@@ -41,19 +41,18 @@ uint32_t cache_read(uintptr_t addr) {
 				k = rand()%lu;
 				if(cache[k+begin_line].dity){
 					mem_write(cache[k+begin_line].addr>>BLOCK_WIDTH, (uint8_t*)&cache[k+begin_line].data[0]);
-
-			printf("%d:write back kuai_num =%lu\n", __LINE__, cache[k+begin_line].addr>>BLOCK_WIDTH);
+					printf("%d:write back kuai_num =%lu\n", __LINE__, cache[k+begin_line].addr>>BLOCK_WIDTH);
 				}	
 			}
 			mem_read(kuai_qun, (uint8_t*)&cache[k+begin_line].data[0]);
 			cache[k+begin_line].valid = 1;
 			cache[k+begin_line].dity = 0;
 			cache[k+begin_line].addr = addr;
-			printf("%d:load kuai_num =%d\n", __LINE__, kuai_qun);
+			printf("%d:load read kuai_num =%d\n", __LINE__, kuai_qun);
 			return cache[k+begin_line].data[(addr>>2)&0xf];
 		}
 	}
-			printf("LINE==%d\n", __LINE__);
+	printf("LINE==%d\n", __LINE__);
 	return 0;
 }
 
@@ -68,7 +67,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 			uint32_t *p = &cache[k+begin_line].data[(addr>>2)&0xf];
 			*p = (*p & ~wmask) | (data & wmask);
 			cache[k+begin_line].dity = 1;
-			printf("LINE==%d\n", __LINE__);
+					printf("%d:hit write kuai_num =%d\n", __LINE__, kuai_qun);
 			return;
 		}
 	}
@@ -79,8 +78,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 				k = rand()%lu;
 				if(cache[k+begin_line].dity){
 					mem_write(cache[k+begin_line].addr>>BLOCK_WIDTH, (uint8_t*)&cache[k+begin_line].data[0]);
-
-			printf("%d:write back kuai_num =%lu\n", __LINE__, cache[k+begin_line].addr>>BLOCK_WIDTH);
+					printf("%d:write back kuai_num =%lu\n", __LINE__, cache[k+begin_line].addr>>BLOCK_WIDTH);
 				}	
 			}
 			mem_read(kuai_qun, (uint8_t*)&cache[k+begin_line].data[0]);
@@ -89,7 +87,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 			uint32_t *p = &cache[k+begin_line].data[(addr>>2)&0xf];
 			*p = (*p & ~wmask) | (data & wmask);
 			cache[k+begin_line].dity = 1;
-			printf("LINE==%d\n", __LINE__);
+					printf("%d:load write kuai_num =%d\n", __LINE__, kuai_qun);
 			return;
 		}
 	}
