@@ -9,6 +9,7 @@ typedef struct{
 	uint32_t data[16];
 	uint64_t addr;
 	bool valid;
+	bool dity;
 } cache_line;
 
 cache_line *cache;
@@ -34,12 +35,12 @@ uint32_t cache_read(uintptr_t addr) {
 		}
 	}
 	// find out if there is a blank line
-
 	for(int k = 0; k <= lu; k++){
 		if(!cache[k+begin_line].valid || k == lu){
-			k %= lu;
+			if (k == lu) k = rand() % lu;
 			mem_read(addr-addr%16, (uint8_t*)&cache[k+begin_line].data[0]);
 			cache[k+begin_line].valid = 1;
+			cache[k+begin_line].dity = 0;
 			cache[k+begin_line].addr = begin_addr;
 			return cache[k+begin_line].data[addr & 0xf];
 		}
@@ -49,6 +50,30 @@ uint32_t cache_read(uintptr_t addr) {
 
 void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 
+	int kuai_qun = (int)addr/16;
+	int zu_no = kuai_qun%zu;
+	int begin_line = zu_no*lu;
+	uintptr_t begin_addr = addr - addr%16;
+	// search data in cache
+	for(int k = 0; k < lu; k++){
+		if((cache[k+begin_line].addr == begin_addr) && cache[k+begin_line].valid){
+			cache[k+begin_line].data[addr & 0xf] = data&wmask;
+			cache[k+begin_line].dity = 1;
+			return;
+		}
+	}
+	// find out if there is a blank line
+	for(int k = 0; k <= lu; k++){
+		if(!cache[k+begin_line].valid || k == lu){
+			if (k == lu) k = rand() % lu;
+			mem_read(addr-addr%16, (uint8_t*)&cache[k+begin_line].data[0]);
+			cache[k+begin_line].valid = 1;
+			cache[k+begin_line].addr = begin_addr;
+			cache[k+begin_line].data[addr & 0xf] = data&wmask;
+			cache[k+begin_line].dity = 1;
+			return;
+		}
+	}
 }
 
 void init_cache(int total_size_width, int associativity_width) {
