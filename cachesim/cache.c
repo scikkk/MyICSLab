@@ -30,6 +30,7 @@ uint32_t cache_read(uintptr_t addr) {
 	// search data in cache
 	for(int k = 0; k < lu; k++){
 		if((cache[k+begin_line].addr >> BLOCK_WIDTH == kuai_qun) && cache[k+begin_line].valid){
+			printf("LINE==%d\n", __LINE__);
 			return cache[k+begin_line].data[(addr>>2)&0xf];
 		} 
 	}
@@ -46,9 +47,11 @@ uint32_t cache_read(uintptr_t addr) {
 			cache[k+begin_line].valid = 1;
 			cache[k+begin_line].dity = 0;
 			cache[k+begin_line].addr = addr;
+			printf("LINE==%d\n", __LINE__);
 			return cache[k+begin_line].data[(addr>>2)&0xf];
 		}
 	}
+			printf("LINE==%d\n", __LINE__);
 	return 0;
 }
 
@@ -63,6 +66,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 			uint32_t *p = &cache[k+begin_line].data[(addr>>2)&0xf];
 			*p = (*p & ~wmask) | (data & wmask);
 			cache[k+begin_line].dity = 1;
+			printf("LINE==%d\n", __LINE__);
 			return;
 		}
 	}
@@ -81,6 +85,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 			uint32_t *p = &cache[k+begin_line].data[(addr>>2)&0xf];
 			*p = (*p & ~wmask) | (data & wmask);
 			cache[k+begin_line].dity = 1;
+			printf("LINE==%d\n", __LINE__);
 			return;
 		}
 	}
