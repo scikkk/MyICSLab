@@ -54,6 +54,7 @@ static void random_trace(void) {
 
   int i;
   for (i = 0; i < 1000000; i ++) {
+	  printf("i = %d\n", i);
     t.t.len = choose_len[ choose(sizeof(choose_len) / sizeof(choose_len[0])) ] ;
     t.t.addr = choose(MEM_SIZE) & ~(t.t.len - 1);
     t.t.is_write = choose(2);
