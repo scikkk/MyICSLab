@@ -4,7 +4,7 @@
 void mem_read(uintptr_t block_num, uint8_t *buf);
 void mem_write(uintptr_t block_num, const uint8_t *buf);
 
-typedef uint32_t[16] Block;
+typedef uint32_t Block[16];
 typedef struct{
 	Block data;
 	bool valid;
