@@ -32,13 +32,18 @@ uint32_t cache_read(uintptr_t addr) {
 	for(int k = 0; k < lu; k++){
 		if((cache[k+begin_line].addr == begin_addr) && cache[k+begin_line].valid){
 			return cache[k+begin_line].data[addr & 0xf];
-		}
+		} 
 	}
 	// find out if there is a blank line
 	for(int k = 0; k <= lu; k++){
 		if(!cache[k+begin_line].valid || k == lu){
-			if (k == lu) k = rand() % lu;
-			mem_read(addr-addr%16, (uint8_t*)&cache[k+begin_line].data[0]);
+			if (k == lu) {
+				k = rand()%lu;
+				if(cache[k+begin_line].dity){
+					mem_write(kuai_qun, (uint8_t*)&cache[k+begin_line].data[0]);
+				}	
+			}
+			mem_read(kuai_qun, (uint8_t*)&cache[k+begin_line].data[0]);
 			cache[k+begin_line].valid = 1;
 			cache[k+begin_line].dity = 0;
 			cache[k+begin_line].addr = begin_addr;
@@ -65,8 +70,13 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 	// find out if there is a blank line
 	for(int k = 0; k <= lu; k++){
 		if(!cache[k+begin_line].valid || k == lu){
-			if (k == lu) k = rand() % lu;
-			mem_read(addr-addr%16, (uint8_t*)&cache[k+begin_line].data[0]);
+			if (k == lu) {
+				k = rand()%lu;
+				if(cache[k+begin_line].dity){
+					mem_write(kuai_qun, (uint8_t*)&cache[k+begin_line].data[0]);
+				}	
+			}
+			mem_read(kuai_qun, (uint8_t*)&cache[k+begin_line].data[0]);
 			cache[k+begin_line].valid = 1;
 			cache[k+begin_line].addr = begin_addr;
 			cache[k+begin_line].data[addr & 0xf] = data&wmask;
@@ -80,6 +90,10 @@ void init_cache(int total_size_width, int associativity_width) {
 	lu = exp2(associativity_width);
 	zu = exp2(total_size_width-associativity_width) / 64;
 	cache = malloc(lu*zu*74);
+	for(int k = 0; k < lu*zu; k++){
+		cache[k].valid = 0;
+		cache[k].dity = 0;
+	}
 }
 
 void display_statistic(void) {
